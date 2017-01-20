@@ -1,0 +1,24 @@
+package com.sf.biocapture.ws.notification;
+
+import javax.inject.Inject;
+import javax.ws.rs.Path;
+
+import com.sf.biocapture.app.BsClazz;
+
+/**
+ * 
+ * @author Nnanna
+ * @since 10/11/2016
+ *
+ */
+@Path("/notifications")
+public class NotificationService  extends BsClazz implements INotificationService {
+	@Inject
+	NotificationDS notificationDs;
+
+	@Override
+	public NotificationResponse load(NotificationRequest request) {
+		return notificationDs.getUserNotifications(request);
+	}
+
+}

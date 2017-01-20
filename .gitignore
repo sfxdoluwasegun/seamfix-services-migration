@@ -1,0 +1,5 @@
+/target/
+.[tcps]*
+/nb-configuration.xml
+/nbactions.xml
+/pom.xml
