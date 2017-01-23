@@ -23,7 +23,7 @@ public interface IActivationStatus {
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response getAgilityStatus(@QueryParam("key") String msisdn, @QueryParam("uid") String uid,@QueryParam("usemsisdn") boolean useMsisdn);
 
-        @POST
+    @POST
 	@Path("/check")
 	@Produces({MediaType.APPLICATION_JSON})
 	public Response checkStatus(@FormParam(MSISDN) String msisdn);
@@ -38,4 +38,14 @@ public interface IActivationStatus {
 	@Path("/set")
 	public Response setStatus(@QueryParam(MSISDN) String msisdn, @QueryParam("date") Long date, @QueryParam("status") String status);
 
+	/*****DYNAMIC KYC ENDPOINTS*****/
+	@POST
+	@Path("/check-msisdn")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response checkMsisdn(@FormParam(MSISDN) String msisdn, @FormParam("puk") String puk);
+	
+	@POST
+	@Path("/check-all")
+	@Produces({MediaType.APPLICATION_JSON})
+	public Response checkAll(@FormParam(MSISDN) String msisdn, @FormParam("serial") String serial, @FormParam("puk") String puk);
 }

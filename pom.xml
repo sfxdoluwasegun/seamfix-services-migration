@@ -213,7 +213,7 @@
 			<version>1.0.0-final</version>
 		</dependency>
 	</dependencies>
-	<!--<distributionManagement>
+	<distributionManagement>
 		<repository>
 			<id>deployment</id>
 			<name>Internal Releases</name>
@@ -224,7 +224,7 @@
 			<name>Internal Releases</name>
 			<url>http://singlewindow.seamfix.com:7997/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
-	</distributionManagement>-->
+	</distributionManagement>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
