@@ -328,12 +328,4 @@ public class BioDataService extends BsClazz implements IBioDataService {
 
         return getAgilityRecords(msisdn, null, true, false, cacheItemName, UseCaseEnum.SIM_SWAP.getName());
     }
-
-	@Override
-	public BioDataResponse get(String msisdn, String serial, String puk) {
-		if(msisdn != null && serial != null){
-			return getBioData(msisdn);
-		}
-		return getResponse("MSISDN or Serial is missing from request", 0, null);
-	}
 }

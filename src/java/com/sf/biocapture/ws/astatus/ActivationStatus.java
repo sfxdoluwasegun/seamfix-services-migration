@@ -9,14 +9,15 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import com.sf.biocapture.app.BsClazz;
+
 import nw.commons.StopWatch;
 
 
 @Path("/astatus")
 public class ActivationStatus extends BsClazz implements IActivationStatus{
-    
-        private static final String LITE = "lite";
-        private static final String SMART_CLIENT = "smartclient";
+
+	private static final String LITE = "lite";
+	private static final String SMART_CLIENT = "smartclient";
 
 	@Inject
 	private ActivationDS asm;
@@ -39,18 +40,18 @@ public class ActivationStatus extends BsClazz implements IActivationStatus{
 		}
 		logger.info("Processing activation status: " + msisdn + " [" + sw.elapsedTime() + " ms]");
 		return Response.status(200).entity(response).build();
-                
+
 	}
 
 	@Override
 	@RolesAllowed({SMART_CLIENT, LITE})
 	public Response getAgilityStatus(String key, String uid,boolean useMsisdn) {                        
-            return Response.status(200).entity( asm.checkStatus(key, uid,useMsisdn) ).build();
+		return Response.status(200).entity( asm.checkStatus(key, uid,useMsisdn) ).build();
 	}
-         
-        
+
+
 	public void get(@Context HttpHeaders headers){
-            headers.getRequestHeader("user-agent");
+		headers.getRequestHeader("user-agent");
 	}
 
 	@Override
@@ -60,10 +61,22 @@ public class ActivationStatus extends BsClazz implements IActivationStatus{
 		return Response.status(Status.OK).entity("Thanks").build();
 	}
 
-    @Override
-    @RolesAllowed({SMART_CLIENT, LITE})
-    public Response checkStatus(String msisdn) {
-        return Response.status(200).entity( asm.checkStatus(msisdn) ).build();
-    }
+	@Override
+	@RolesAllowed({SMART_CLIENT, LITE})
+	public Response checkStatus(String msisdn) {
+		return Response.status(200).entity( asm.checkStatus(msisdn) ).build();
+	}
+
+	@Override
+	public Response checkMsisdn(String msisdn, String puk) {
+		// TODO do proper implementation with puk
+		return Response.status(200).entity( asm.checkStatus(msisdn)).build();
+	}
+
+	@Override
+	public Response checkAll(String msisdn, String serial, String puk) {
+		// TODO do proper implementation with puk
+		return Response.status(200).entity( asm.checkStatus(msisdn)).build();
+	}
 
 }
