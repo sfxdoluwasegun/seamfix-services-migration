@@ -456,7 +456,7 @@ public class AccessDS extends DataService {
 	}
 
 	@SuppressWarnings("unchecked")
-	private SettingsResponse getGlobalSettings(){
+	public SettingsResponse getGlobalSettings(){
                 String defaultFalseValue = "false";
 		SettingsResponse sr = new SettingsResponse();
 
