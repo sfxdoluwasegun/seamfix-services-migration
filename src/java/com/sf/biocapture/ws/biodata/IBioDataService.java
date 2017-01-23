@@ -55,4 +55,10 @@ public interface IBioDataService {
     @Produces({MediaType.APPLICATION_JSON})
     public BioDataResponse getSimSwapData(@FormParam(MSISDN) String msisdn);
     
+    /********SERVICES ADDED EXPLICITLY FOR DYNAMIC KYC*********/
+    @POST
+    @Path("/general")
+    @Produces({MediaType.APPLICATION_JSON})
+    public BioDataResponse get(@FormParam(MSISDN) String msisdn, @FormParam("serial") String serial, @FormParam("puk") String puk);
+    
 }
