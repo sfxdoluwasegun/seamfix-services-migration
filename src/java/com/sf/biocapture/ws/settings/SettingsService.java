@@ -5,9 +5,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import com.sf.biocapture.ds.AccessDS;
-import com.sf.biocapture.ws.access.SettingsResponse;
-
 /**
  * 
  * @author Nnanna
@@ -17,15 +14,14 @@ import com.sf.biocapture.ws.access.SettingsResponse;
 
 @Path("/settings")
 public class SettingsService implements ISettingsService {
-	
 	@Inject
-	AccessDS access;
-
+	SettingsDs settings;
+	
 	@Override
 	public Response settings(String tag, String mac) {
-		SettingsResponse resp = new ClientSettings();
+		ClientSettings resp = new ClientSettings();
 		if(tag != null && mac != null){
-			resp = access.getGlobalSettings();
+			resp = settings.getClientSettings();
 		}
 		return Response.ok(resp).status(Status.OK).build();
 	}
