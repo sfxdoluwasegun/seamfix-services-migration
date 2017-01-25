@@ -27,8 +27,17 @@ public enum SettingsEnum {
     SIMSWAP_DATE_VALIDATION("SIMSWAP-DATE-VALIDATION", "true", "Indicates if sim swap date will be compared against activation date"),
     SIMSWAP_TIME_FRAME("SIMSWAP-TIME-FRAME", "7", "Minimum no of days allowed between sim activation and sim swap"),
     ENABLE_VAS_MODULE("ENABLE-VAS-MODULE", "true", "Determines whether or not the VAS module will be enabled on the clients"),
-    MINIMUM_ACCEPTABLE_CHARACTER("MINIMUM-ACCEPTABLE-CHARACTER", "2", "This is the minimum number of allowed characters for name field during foreigner's registration");
+    MINIMUM_ACCEPTABLE_CHARACTER("MINIMUM-ACCEPTABLE-CHARACTER", "2", "This is the minimum number of allowed characters for name field during foreigner's registration"),
 
+    //DYNAMIC BIOSMART SETTINGS
+    VALIDATE_MSISDN_NM("VALIDATE-MSISDN-NM", "true", "Determines whether client will do backend validation for msisdn for New Reg (MSISDN) use case"),
+    PUK_MANDATORY_NM("PUK-MANDATORY-NM", "false", "Determines whether puk is mandatory for New Reg (MSISDN) use case"),
+    VALIDATE_SERIAL_NS("VALIDATE-SERIAL-NS", "true", "Determines whether client will do backend validation for sim serial for New Reg (SIM SERIAL) use case"),
+    PUK_MANDATORY_NS("PUK-MANDATORY-NS", "false", "Determines whether puk is mandatory for New Reg (SIM SERIAL) use case"),
+    NMS_VALIDATE_MSISDN("NMS-VALIDATE-MSISDN", "true", "Determines whether client will do backend validation for msisdn for New Reg (MSISDN+SERIAL) use case"),
+    NMS_VALIDATE_SERIAL("NMS-VALIDATE-SERIAL", "true", "Determines whether client will do backend validation for sim serial for New Reg (MSISDN+SERIAL) use case"),
+    NMS_PUK_MANDATORY("NMS-PUK-MANDATORY", "false", "Determines whether puk is mandatory for New Reg (MSISSN+SERIAL) use case");
+    
     private SettingsEnum(String name, String value, String description) {
         this.name = name;
         this.value = value;
