@@ -32,6 +32,10 @@ public class InputComponent implements Serializable {
     private String description;
     @XmlElement(name = "schema")
     private String schema;
+    @XmlElement(name = "required")
+    private Boolean required = true;
+    @XmlElement(name = "enabled")
+    private Boolean enabled = true;
     @XmlElement(name = "data_source")
     private List<InputDataSource> inputDataSources;
 
@@ -82,6 +86,22 @@ public class InputComponent implements Serializable {
 
     public void setSchema(String schema) {
         this.schema = schema;
+    }
+
+    public Boolean getRequired() {
+        return required;
+    }
+
+    public void setRequired(Boolean required) {
+        this.required = required;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<InputDataSource> getInputDataSources() {
