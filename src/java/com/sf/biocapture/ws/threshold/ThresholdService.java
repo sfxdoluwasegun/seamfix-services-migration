@@ -6,6 +6,7 @@
 package com.sf.biocapture.ws.threshold;
 
 import com.sf.biocapture.app.BsClazz;
+import com.sf.biocapture.ws.access.pojo.InputComponents;
 import com.sf.biocapture.ws.threshold.pojo.DemographicsPojo;
 import com.sf.biocapture.ws.threshold.pojo.FingerprintProfilePojo;
 import com.sf.biocapture.ws.threshold.pojo.FingerprintTypeProfilePojo;
@@ -34,6 +35,7 @@ public class ThresholdService extends BsClazz implements IThresholdService {
 
     private final ThresholdUtil thresholdUtil = new ThresholdUtil();
     private static final String PASSPORT_PROFILE_THRESHOLD_NAME = "passport-profile-threshold.xml";
+    public static final String DYNAMIC_INPUT_NAME = "dynamic-input.xml";
     private static final String FINGERPRINT_PROFILE_THRESHOLD_NAME = "fingerprint-profile-threshold.xml";
 
     /**
@@ -162,6 +164,13 @@ public class ThresholdService extends BsClazz implements IThresholdService {
         thresholdUtil.marshal(PassportProfilePojo.class, thresholdUtil.newPassportProfilePojo(), PASSPORT_PROFILE_THRESHOLD_NAME);
         thresholdUtil.marshal(FingerprintTypeProfilePojo.class, thresholdUtil.newFingerprintTypeProfilePojo(), "fingerprint-type-profile-threshold.xml");
         thresholdUtil.marshal(DemographicsPojo.class, thresholdUtil.newDemographicsPojo(), "demographic-threshold.xml");
+        return Response.status(200).entity(new RequestPojo(2, "2398HHH", "MK1234567890", "mugwu@seamfix.com")).build();
+    }
+
+    @Override
+    public Response getRequestPojoWithDynamicInput() {        
+        ThresholdUtil thresholdUtil = new ThresholdUtil();
+        thresholdUtil.marshal(InputComponents.class, thresholdUtil.newInputComponents(), DYNAMIC_INPUT_NAME);
         return Response.status(200).entity(new RequestPojo(2, "2398HHH", "MK1234567890", "mugwu@seamfix.com")).build();
     }
 
