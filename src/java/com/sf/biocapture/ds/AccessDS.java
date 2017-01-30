@@ -40,8 +40,8 @@ import com.sf.biocapture.entity.KitMarker;
 import com.sf.biocapture.entity.KycBlacklist;
 import com.sf.biocapture.entity.KycBroadcast;
 import com.sf.biocapture.entity.Node;
-import com.sf.biocapture.entity.Setting;
 import com.sf.biocapture.entity.onboarding.OnboardingStatus;
+import com.sf.biocapture.entity.Setting;
 import com.sf.biocapture.entity.audit.VersionLog;
 import com.sf.biocapture.entity.enums.KycPrivilege;
 import com.sf.biocapture.entity.enums.OtpStatusRecordTypeEnum;
@@ -61,18 +61,11 @@ import com.sf.biocapture.ws.access.FetchPrivilegesResponse;
 import com.sf.biocapture.ws.access.NodeData;
 import com.sf.biocapture.ws.access.PasswordResetResponse;
 import com.sf.biocapture.ws.access.SettingsResponse;
-import com.sf.biocapture.ws.access.pojo.InputComponents;
 import com.sf.biocapture.ws.onboarding.AgentFingerprintPojo;
 import com.sf.biocapture.ws.otp.OtpDS;
 import com.sf.biocapture.ws.tags.ClientRefRequest;
-import com.sf.biocapture.ws.threshold.ThresholdService;
-import com.sf.biocapture.ws.threshold.ThresholdUtil;
 
 import java.io.InputStream;
-import java.io.StringWriter;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import nw.orm.core.exception.NwormQueryException;
 @Stateless
@@ -92,7 +85,6 @@ public class AccessDS extends DataService {
 	private OtpDS otpDS;
 	@Inject 
 	private KannelSMS kSms;
-        private final ThresholdUtil thresholdUtil = new ThresholdUtil();
 	
 	public static void main(String[] args) {
 		System.out.println(new Date().getTime());
@@ -464,7 +456,7 @@ public class AccessDS extends DataService {
 	}
 
 	@SuppressWarnings("unchecked")
-	private SettingsResponse getGlobalSettings(){
+	public SettingsResponse getGlobalSettings(){
                 String defaultFalseValue = "false";
 		SettingsResponse sr = new SettingsResponse();
 
@@ -543,17 +535,7 @@ public class AccessDS extends DataService {
                 try {
                     sr.setClientActivityLogBatchSize(Integer.valueOf(clientLogBatchSize));
                     sr.setMaximumMsisdnAllowedPerRegistration(Integer.valueOf(getSettingValue(SettingsEnum.MAXIMUM_MSISDN_ALLOWED_PER_REGISTRATION)));
-                    
-                    JAXBContext jc = JAXBContext.newInstance(InputComponents.class);
-                    Marshaller marshaller = jc.createMarshaller();
-                    marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-                    marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-                    marshaller.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-                    StringWriter sw = new StringWriter();
-                    marshaller.marshal(thresholdUtil.unmarshal(InputComponents.class, ThresholdService.DYNAMIC_INPUT_NAME), sw);
-                    String dynamicInputs = sw.toString();
-                    sr.setDynamicInputs(dynamicInputs);
-                } catch (NumberFormatException | JAXBException e) {
+                } catch (NumberFormatException e) {
                     logger.error("", e);
                 }
 		return sr;

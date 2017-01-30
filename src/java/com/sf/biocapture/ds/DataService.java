@@ -117,7 +117,7 @@ public abstract class DataService extends BsClazz {
 	}
 
 	public KMRole getKmUserRole(KycManagerRole role){
-		return dbService.getByCriteria(KMRole.class, Restrictions.eq("role", role));
+		return dbService.getByCriteria(KMRole.class, Restrictions.eq("role", role.name()));
 	}
 
 	public boolean save(Object item){
