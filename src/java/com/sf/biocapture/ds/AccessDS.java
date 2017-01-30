@@ -40,8 +40,8 @@ import com.sf.biocapture.entity.KitMarker;
 import com.sf.biocapture.entity.KycBlacklist;
 import com.sf.biocapture.entity.KycBroadcast;
 import com.sf.biocapture.entity.Node;
-import com.sf.biocapture.entity.Setting;
 import com.sf.biocapture.entity.onboarding.OnboardingStatus;
+import com.sf.biocapture.entity.Setting;
 import com.sf.biocapture.entity.audit.VersionLog;
 import com.sf.biocapture.entity.enums.KycPrivilege;
 import com.sf.biocapture.entity.enums.OtpStatusRecordTypeEnum;
@@ -66,7 +66,6 @@ import com.sf.biocapture.ws.onboarding.AgentFingerprintPojo;
 import com.sf.biocapture.ws.otp.OtpDS;
 import com.sf.biocapture.ws.tags.ClientRefRequest;
 import com.sf.biocapture.ws.threshold.ThresholdService;
-import com.sf.biocapture.ws.threshold.ThresholdUtil;
 
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -92,7 +91,8 @@ public class AccessDS extends DataService {
 	private OtpDS otpDS;
 	@Inject 
 	private KannelSMS kSms;
-        private final ThresholdUtil thresholdUtil = new ThresholdUtil();
+        
+        private ThresholdUtil thresholdUtil = new ThresholdUtil();
 	
 	public static void main(String[] args) {
 		System.out.println(new Date().getTime());
@@ -464,7 +464,7 @@ public class AccessDS extends DataService {
 	}
 
 	@SuppressWarnings("unchecked")
-	private SettingsResponse getGlobalSettings(){
+	public SettingsResponse getGlobalSettings(){
                 String defaultFalseValue = "false";
 		SettingsResponse sr = new SettingsResponse();
 
