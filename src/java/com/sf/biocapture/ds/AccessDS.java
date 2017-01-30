@@ -66,6 +66,7 @@ import com.sf.biocapture.ws.onboarding.AgentFingerprintPojo;
 import com.sf.biocapture.ws.otp.OtpDS;
 import com.sf.biocapture.ws.tags.ClientRefRequest;
 import com.sf.biocapture.ws.threshold.ThresholdService;
+import com.sf.biocapture.ws.threshold.ThresholdUtil;
 
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -91,7 +92,6 @@ public class AccessDS extends DataService {
 	private OtpDS otpDS;
 	@Inject 
 	private KannelSMS kSms;
-        
         private ThresholdUtil thresholdUtil = new ThresholdUtil();
 	
 	public static void main(String[] args) {
@@ -543,7 +543,6 @@ public class AccessDS extends DataService {
                 try {
                     sr.setClientActivityLogBatchSize(Integer.valueOf(clientLogBatchSize));
                     sr.setMaximumMsisdnAllowedPerRegistration(Integer.valueOf(getSettingValue(SettingsEnum.MAXIMUM_MSISDN_ALLOWED_PER_REGISTRATION)));
-                    
                     JAXBContext jc = JAXBContext.newInstance(InputComponents.class);
                     Marshaller marshaller = jc.createMarshaller();
                     marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
