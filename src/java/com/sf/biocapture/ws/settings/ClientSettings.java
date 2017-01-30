@@ -21,6 +21,9 @@ public class ClientSettings extends SettingsResponse{
 	private boolean validateMsisdnNMS = Boolean.TRUE;
 	private boolean validateSerialNMS = Boolean.TRUE;
 	private boolean pukMandatoryNMS = Boolean.FALSE;
+	
+	//DYNAMIC DEMOGRAPHICS
+	private String dynamicInputs;
 
 	public boolean isValidateMsisdnNM() {
 		return validateMsisdnNM;
@@ -78,6 +81,14 @@ public class ClientSettings extends SettingsResponse{
 		this.pukMandatoryNMS = pukMandatoryNMS;
 	}
 	
+	public String getDynamicInputs() {
+		return dynamicInputs;
+	}
+
+	public void setDynamicInputs(String dynamicInputs) {
+		this.dynamicInputs = dynamicInputs;
+	}
+
 	public void to(SettingsResponse sr){
 		//client fields
 		setClientFieldSettings(sr.getClientFieldSettings());
@@ -85,6 +96,7 @@ public class ClientSettings extends SettingsResponse{
 		setRegexTwo(sr.getRegexTwo());
 		setSpoofData(sr.isSpoofData());
 		setMinimumAcceptableCharacter(sr.getMinimumAcceptableCharacter());
+		setDynamicInputs(sr.getDynamicInputs());
 		
 		//sim swap
 		setModeOfValidation(sr.getModeOfValidation());
