@@ -67,6 +67,7 @@ public class SettingsResponse extends ResponseData {
     private int maximumMsisdnAllowedPerRegistration = 5;
     private boolean enableVasModule = true;
     private int minimumAcceptableCharacter;
+    private String dynamicInputs;
 
     public SettingsResponse() {
         setCode(ResponseCodeEnum.ERROR);
@@ -337,4 +338,12 @@ public class SettingsResponse extends ResponseData {
         this.minimumAcceptableCharacter = minimumAcceptableCharacter;
     }
 
+    public String getDynamicInputs() {
+        return dynamicInputs;
+    }
+
+    public void setDynamicInputs(String dynamicInputs) {
+        this.dynamicInputs = dynamicInputs;
+    }
+ 
 }

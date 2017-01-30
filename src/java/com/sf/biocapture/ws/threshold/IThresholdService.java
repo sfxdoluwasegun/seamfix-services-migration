@@ -41,4 +41,10 @@ public interface IThresholdService {
     @Path("/requestpojo/fingertypes")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getRequestPojoWithFingerType();
+    
+    
+    @GET
+    @Path("/requestpojo/dynamicinput")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getRequestPojoWithDynamicInput();
 }

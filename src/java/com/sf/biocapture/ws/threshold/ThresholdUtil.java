@@ -6,6 +6,10 @@
 package com.sf.biocapture.ws.threshold;
 
 import com.sf.biocapture.app.BsClazz;
+import com.sf.biocapture.ws.access.pojo.InputComponent;
+import com.sf.biocapture.ws.access.pojo.InputComponents;
+import com.sf.biocapture.ws.access.pojo.InputDataSource;
+import com.sf.biocapture.ws.access.pojo.InputTypeEnum;
 import com.sf.biocapture.ws.threshold.pojo.AnomaliesCharacteristicsPojo;
 import com.sf.biocapture.ws.threshold.pojo.DemographicPropertyInfo;
 import com.sf.biocapture.ws.threshold.pojo.DemographicsPojo;
@@ -19,6 +23,8 @@ import com.sf.biocapture.ws.threshold.pojo.ImageStorageCharacteristicsPojo;
 import com.sf.biocapture.ws.threshold.pojo.PassportProfilePojo;
 import com.sf.biocapture.ws.threshold.pojo.PropertyInfoPojo;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -31,10 +37,10 @@ import javax.xml.bind.Unmarshaller;
  */
 public class ThresholdUtil extends BsClazz {
 
-    private PassportProfilePojo passportProfilePojo;
-    private FingerprintProfilePojo fingerprintProfilePojo;
-    private FingerprintTypeProfilePojo fingerprintTypeProfilePojo;
-    private DemographicsPojo demographicsPojo;
+    private static PassportProfilePojo passportProfilePojo;
+    private static FingerprintProfilePojo fingerprintProfilePojo;
+    private static FingerprintTypeProfilePojo fingerprintTypeProfilePojo;
+    private static DemographicsPojo demographicsPojo;
 
     public ThresholdUtil() {
     }
@@ -243,5 +249,54 @@ public class ThresholdUtil extends BsClazz {
         demographicsPojo.setCompanyStreetAddress(demographicPropertyInfo);
         demographicsPojo.setCompanyCityAddress(demographicPropertyInfo);
         return demographicsPojo;
+    }
+
+    public InputComponents newInputComponents() {
+        InputComponents inputComponents = new InputComponents();
+        //country config
+        InputComponent country = new InputComponent();
+        country.setDescription("Country input");
+        country.setId(1);
+        country.setInputTypeEnum(InputTypeEnum.TEXT_FIELD);
+        country.setLabel("Country");
+        country.setRegexPattern("");
+        country.setSchema("dda1");
+
+        //state config        
+        InputComponent state = new InputComponent();
+        state.setDescription("State input");
+        state.setId(2);
+        state.setInputTypeEnum(InputTypeEnum.TEXT_FIELD);
+        state.setLabel("State");
+        state.setRegexPattern("");
+        state.setSchema("dda2");
+
+        List<InputComponent> ics = new ArrayList<>();
+        List<InputDataSource> countryDataSources = new ArrayList<>();
+        List<InputDataSource> stateDataSources = new ArrayList<>();
+        String countries[] = {"Nigeria", "Ghana", "United Kingdom"};
+        String states[] = {"Enugu", "Imo", "Lagos"};
+        for (int i = 0; i < countries.length; i++) {
+            InputDataSource dataSource = new InputDataSource();
+            dataSource.setId(i);
+            dataSource.setValue(countries[i]);
+            dataSource.setInputFk(country.getId());
+            countryDataSources.add(dataSource);
+            for (int y = 0; y < states.length; y++) {
+                InputDataSource data = new InputDataSource();
+                data.setId(y);
+                data.setValue(states[y]);
+                data.setDataFk(dataSource.getId());
+                data.setInputFk(state.getId());
+                stateDataSources.add(data);
+            }
+        }
+        country.setInputDataSources(countryDataSources);
+        state.setInputDataSources(stateDataSources);
+        ics.add(country);
+        ics.add(state);
+        inputComponents.setInputComponents(ics);
+
+        return inputComponents;
     }
 }
