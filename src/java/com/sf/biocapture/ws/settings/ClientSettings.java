@@ -24,6 +24,14 @@ public class ClientSettings extends SettingsResponse{
 	
 	//DYNAMIC DEMOGRAPHICS
 	private String dynamicInputs;
+	
+	//FIELD LENGTHS
+	private int msisdnMinLength;
+	private int msisdnMaxLength;
+	private int serialMinLength;
+	private int serialMaxLength;
+	private int pukMinLength;
+	private int pukMaxLength;
 
 	public boolean isValidateMsisdnNM() {
 		return validateMsisdnNM;
@@ -111,18 +119,79 @@ public class ClientSettings extends SettingsResponse{
 		
 		//core
 		setClientlockoutPeriod(sr.getClientlockoutPeriod());
-		setClientAuditSyncInterval(sr.getClientAuditSyncInterval());
 		setClientActivityLogBatchSize(sr.getClientActivityLogBatchSize());
 		setLoginMode(sr.getLoginMode());
 		setLoginOffline(sr.isLoginOffline());
 		setOfflineValidationType(sr.getOfflineValidationType());
 		setOtpRequired(sr.isOtpRequired());
-		setHeartbeatRate(sr.getHeartbeatRate());
 		setAvailableUseCases(sr.getAvailableUseCases());
 		setMaxMsisdn(sr.getMaxMsisdn());
 		setMaximumMsisdnAllowedPerRegistration(sr.getMaximumMsisdnAllowedPerRegistration());
 		
 		//Registrations		
 		setSignRegistration(sr.isSignRegistration());
+		
+		//intervals
+		setNotificationsChecker(sr.getNotificationsChecker());
+		setAgentBioSynchronizer(sr.getAgentBioSynchronizer());
+		setAuditXmlSynchronizer(sr.getAuditXmlSynchronizer());
+		setAuditSynchronizer(sr.getAuditSynchronizer());
+		setThresholdUpdater(sr.getThresholdUpdater());
+		setActivationChecker(sr.getActivationChecker());
+		setSynchronizer(sr.getSynchronizer());
+		setHarmonizer(sr.getHarmonizer());
+		setSettingsService(sr.getSettingsService());
+		setBlackLister(sr.getBlackLister());
+		setHeartbeatRate(sr.getHeartbeatRate());
+		setClientAuditSyncInterval(sr.getClientAuditSyncInterval());
 	}
+
+	public int getMsisdnMinLength() {
+		return msisdnMinLength;
+	}
+
+	public void setMsisdnMinLength(int msisdnMinLength) {
+		this.msisdnMinLength = msisdnMinLength;
+	}
+
+	public int getMsisdnMaxLength() {
+		return msisdnMaxLength;
+	}
+
+	public void setMsisdnMaxLength(int msisdnMaxLength) {
+		this.msisdnMaxLength = msisdnMaxLength;
+	}
+
+	public int getSerialMinLength() {
+		return serialMinLength;
+	}
+
+	public void setSerialMinLength(int serialMinLength) {
+		this.serialMinLength = serialMinLength;
+	}
+
+	public int getSerialMaxLength() {
+		return serialMaxLength;
+	}
+
+	public void setSerialMaxLength(int serialMaxLength) {
+		this.serialMaxLength = serialMaxLength;
+	}
+
+	public int getPukMinLength() {
+		return pukMinLength;
+	}
+
+	public void setPukMinLength(int pukMinLength) {
+		this.pukMinLength = pukMinLength;
+	}
+
+	public int getPukMaxLength() {
+		return pukMaxLength;
+	}
+
+	public void setPukMaxLength(int pukMaxLength) {
+		this.pukMaxLength = pukMaxLength;
+	}
+
 }

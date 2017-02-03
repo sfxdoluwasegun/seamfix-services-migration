@@ -70,6 +70,7 @@ import com.sf.biocapture.ws.threshold.ThresholdUtil;
 
 import java.io.InputStream;
 import java.io.StringWriter;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -539,10 +540,7 @@ public class AccessDS extends DataService {
                     sr.setAvailableUseCases(useCases);
                 }
                 
-                String clientLogBatchSize = getSettingValue(SettingsEnum.CLIENT_ACTIVITY_LOG_BATCH_SIZE);
                 try {
-                    sr.setClientActivityLogBatchSize(Integer.valueOf(clientLogBatchSize));
-                    sr.setMaximumMsisdnAllowedPerRegistration(Integer.valueOf(getSettingValue(SettingsEnum.MAXIMUM_MSISDN_ALLOWED_PER_REGISTRATION)));
                     JAXBContext jc = JAXBContext.newInstance(InputComponents.class);
                     Marshaller marshaller = jc.createMarshaller();
                     marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -555,7 +553,34 @@ public class AccessDS extends DataService {
                 } catch (NumberFormatException | JAXBException e) {
                     logger.error("", e);
                 }
+                
+                sr.setClientActivityLogBatchSize(parseSettingInteger(SettingsEnum.CLIENT_ACTIVITY_LOG_BATCH_SIZE));
+                sr.setMaximumMsisdnAllowedPerRegistration(parseSettingInteger(SettingsEnum.MAXIMUM_MSISDN_ALLOWED_PER_REGISTRATION));
+                
+                //CLIENT SERVICE INTERVALS
+                sr.setNotificationsChecker(parseSettingInteger(SettingsEnum.NOTIFICATION_CHECKER_INTERVAL));
+                sr.setAgentBioSynchronizer(parseSettingInteger(SettingsEnum.AGENT_BIOSYNC_INTERVAL));
+	
+                sr.setAuditXmlSynchronizer(parseSettingInteger(SettingsEnum.AUDIT_XML_SYNC_INTERVAL));
+                sr.setAuditSynchronizer(parseSettingInteger(SettingsEnum.AUDIT_SYNC_INTERVAL));
+                sr.setThresholdUpdater(parseSettingInteger(SettingsEnum.THRESHOLD_CHECKER_INTERVAL));
+                sr.setActivationChecker(parseSettingInteger(SettingsEnum.ACTIVATION_CHECKER_INTERVAL));
+                sr.setSynchronizer(parseSettingInteger(SettingsEnum.SYNCHRONIZER_INTERVAL));
+                sr.setHarmonizer(parseSettingInteger(SettingsEnum.HARMONIZER_INTERVAL));
+                sr.setSettingsService(parseSettingInteger(SettingsEnum.SETTINGS_INTERVAL));
+                sr.setBlackLister(parseSettingInteger(SettingsEnum.BLACKLIST_CHECKER_INTERVAL));
 		return sr;
+	}
+	
+	private int parseSettingInteger(SettingsEnum setting){
+		int finalVal = 0;
+		try{
+			finalVal = Integer.valueOf(getSettingValue(setting));
+		}catch(NumberFormatException e){
+			logger.error("NumberFormatException on retrieving setting: " + setting.getName());
+			finalVal = Integer.valueOf(setting.getValue()); //use default instead
+		}
+		return finalVal;
 	}
 	
 	public SettingsResponse getSimSwapSettings(SettingsResponse sr){
