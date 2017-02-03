@@ -68,6 +68,18 @@ public class SettingsResponse extends ResponseData {
     private boolean enableVasModule = true;
     private int minimumAcceptableCharacter;
     private String dynamicInputs;
+    
+    /***SERVICE INTERVALS***/
+    private int notificationsChecker;
+    private int agentBioSynchronizer;
+    private int auditXmlSynchronizer;
+    private int thresholdUpdater;
+    private int auditSynchronizer;
+    private int activationChecker;
+    private int synchronizer;
+    private int harmonizer;
+    private int settingsService;
+    private int blackLister;
 
     public SettingsResponse() {
         setCode(ResponseCodeEnum.ERROR);
@@ -345,5 +357,89 @@ public class SettingsResponse extends ResponseData {
     public void setDynamicInputs(String dynamicInputs) {
         this.dynamicInputs = dynamicInputs;
     }
+
+	public int getNotificationsChecker() {
+		return notificationsChecker;
+	}
+
+	public void setNotificationsChecker(int notificationsChecker) {
+		this.notificationsChecker = notificationsChecker;
+	}
+
+	public int getAgentBioSynchronizer() {
+		return agentBioSynchronizer;
+	}
+
+	public void setAgentBioSynchronizer(int agentBioSynchronizer) {
+		this.agentBioSynchronizer = agentBioSynchronizer;
+	}
+
+	public int getAuditXmlSynchronizer() {
+		return auditXmlSynchronizer;
+	}
+
+	public void setAuditXmlSynchronizer(int auditXmlSynchronizer) {
+		this.auditXmlSynchronizer = auditXmlSynchronizer;
+	}
+
+	public int getThresholdUpdater() {
+		return thresholdUpdater;
+	}
+
+	public void setThresholdUpdater(int thresholdUpdater) {
+		this.thresholdUpdater = thresholdUpdater;
+	}
+
+	public int getAuditSynchronizer() {
+		return auditSynchronizer;
+	}
+
+	public void setAuditSynchronizer(int auditSynchronizer) {
+		this.auditSynchronizer = auditSynchronizer;
+	}
+
+	public int getActivationChecker() {
+		return activationChecker;
+	}
+
+	public void setActivationChecker(int activationChecker) {
+		this.activationChecker = activationChecker;
+	}
+
+	public int getSynchronizer() {
+		return synchronizer;
+	}
+
+	public void setSynchronizer(int synchronizer) {
+		this.synchronizer = synchronizer;
+	}
+
+	public int getHarmonizer() {
+		return harmonizer;
+	}
+
+	public void setHarmonizer(int harmonizer) {
+		this.harmonizer = harmonizer;
+	}
+
+	public int getSettingsService() {
+		return settingsService;
+	}
+
+	public void setSettingsService(int settingsService) {
+		this.settingsService = settingsService;
+	}
+
+	public int getBlackLister() {
+		return blackLister;
+	}
+
+	public void setBlackLister(int blackLister) {
+		this.blackLister = blackLister;
+	}
+
+	public void setHeartbeatRate(long heartbeatRate) {
+		this.heartbeatRate = heartbeatRate;
+	}
  
 }

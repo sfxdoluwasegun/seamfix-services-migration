@@ -1,6 +1,5 @@
 package com.sf.biocapture.ws.settings;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,6 +17,5 @@ public interface ISettingsService {
 	@POST
 	@Path("/global")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response settings(@FormParam("tag") String tag, @FormParam("mac") String mac);
 }

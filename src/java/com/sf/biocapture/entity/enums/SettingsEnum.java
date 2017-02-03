@@ -36,7 +36,26 @@ public enum SettingsEnum {
     PUK_MANDATORY_NS("PUK-MANDATORY-NS", "false", "Determines whether puk is mandatory for New Reg (SIM SERIAL) use case"),
     NMS_VALIDATE_MSISDN("NMS-VALIDATE-MSISDN", "true", "Determines whether client will do backend validation for msisdn for New Reg (MSISDN+SERIAL) use case"),
     NMS_VALIDATE_SERIAL("NMS-VALIDATE-SERIAL", "true", "Determines whether client will do backend validation for sim serial for New Reg (MSISDN+SERIAL) use case"),
-    NMS_PUK_MANDATORY("NMS-PUK-MANDATORY", "false", "Determines whether puk is mandatory for New Reg (MSISSN+SERIAL) use case");
+    NMS_PUK_MANDATORY("NMS-PUK-MANDATORY", "false", "Determines whether puk is mandatory for New Reg (MSISSN+SERIAL) use case"),
+    
+    MSISDN_MIN_LENGTH("MSISDN-MIN-LENGTH", "11", "MSISDN minimum length"),
+    MSISDN_MAX_LENGTH("MSISDN-MAX-LENGTH", "11", "MSISDN maximum length"),
+    SERIAL_MIN_LENGTH("SERIAL-MIN-LENGTH", "20", "SERIAL minimum length"),
+    SERIAL_MAX_LENGTH("SERIAL-MAX-LENGTH", "20", "SERIAL maximum length"),
+    PUK_MIN_LENGTH("PUK-MIN-LENGTH", "8", "PUK minimum length"),
+    PUK_MAX_LENGTH("PUK-MAX-LENGTH", "8", "PUK maximum length"),
+    
+    NOTIFICATION_CHECKER_INTERVAL("NOTIFICATION-CHECKER-INTERVAL", "60", "Time interval, in seconds, between which client checks for notifications from server"),
+    AGENT_BIOSYNC_INTERVAL("AGENT-BIOSYNC-INTERVAL", "60", "Time interval, in seconds, between which client sends available agents' biometrics to server"),
+    AUDIT_SYNC_INTERVAL("AUDIT-SYNC-INTERVAL", "1800", "Time interval, in seconds, between which client sends available client activity logs to HTTP server"),
+    AUDIT_XML_SYNC_INTERVAL("AUDIT-XML-SYNC-INTERVAL", "1800", "Time interval, in seconds, between which client sends available audit xml files to SFTP server"),
+    THRESHOLD_CHECKER_INTERVAL("THRESHOLD-CHECKER-INTERVAL", "3600", "Time interval, in seconds, between which client checks server for threshold updates"),
+    ACTIVATION_CHECKER_INTERVAL("ACTIVATION-CHECKER-INTERVAL", "1200", "Time interval, in seconds, between which client checks server for activation status of msisdns"),
+    SYNCHRONIZER_INTERVAL("SYNCHRONIZER-INTERVAL", "2", "Time interval, in seconds, between which client sends available sync files to SFTP server for processing"),
+    HARMONIZER_INTERVAL("HARMONIZER-INTERVAL", "120", "Time interval, in seconds, between which client checks for status of each registration using unique ID"),
+    SETTINGS_INTERVAL("SETTINGS_INTERVAL", "300", "Time interval, in seconds, between which client checks server for settings"),
+    BLACKLIST_CHECKER_INTERVAL("BLACKLIST-CHECKER-INTERVAL", "600", "Time interval, in seconds, between which client checks server for kit and agent blacklist status");
+
     
     private SettingsEnum(String name, String value, String description) {
         this.name = name;
