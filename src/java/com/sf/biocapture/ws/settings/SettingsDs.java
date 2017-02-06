@@ -14,9 +14,13 @@ import com.sf.biocapture.ds.AccessDS;
 import com.sf.biocapture.ds.DataService;
 import com.sf.biocapture.entity.Setting;
 import com.sf.biocapture.entity.enums.SettingsEnum;
+import com.sf.biocapture.ws.ResponseCodeEnum;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * 
  * @author Nnanna
+ * @author Marcel
  * @since 24/01/2017
  * 
  */
@@ -60,7 +64,21 @@ public class SettingsDs extends DataService {
 		cs.setSerialMaxLength(parseSettingInteger(SettingsEnum.SERIAL_MAX_LENGTH));
 		cs.setPukMinLength(parseSettingInteger(SettingsEnum.PUK_MIN_LENGTH));
 		cs.setPukMaxLength(parseSettingInteger(SettingsEnum.PUK_MAX_LENGTH));
+                
+                cs.setPortraitCaptureMandatory(Boolean.valueOf(access.getSettingValue(SettingsEnum.PORTRAIT_MANDATORY)));
+                cs.setPortraitValidationMandotary(Boolean.valueOf(access.getSettingValue(SettingsEnum.VALIDATE_PORTRAIT)));
+                cs.setFingerprintCaptureMandatory(Boolean.valueOf(access.getSettingValue(SettingsEnum.FINGERPRINT_MANDATORY)));
+                cs.setFingerprintValidationMandotary(Boolean.valueOf(access.getSettingValue(SettingsEnum.VALIDATE_FINGERPRINT)));
+                
+                String requiredFingerprintTypes [] = access.getSettingValue(SettingsEnum.REQUIRED_FINGERPRINT_TYPES).split(",");
+                List<SettingFingerprintTypesEnum> fingerprintTypesEnum = new ArrayList<>();
+                for (String type : requiredFingerprintTypes) {
+                    fingerprintTypesEnum.add(SettingFingerprintTypesEnum.valueOf(type.trim()));
+                }
+                cs.setFingerprintTypes(fingerprintTypesEnum);
 
+                cs.setCode(ResponseCodeEnum.SUCCESS);
+                cs.setDescription(ResponseCodeEnum.SUCCESS.getDescription());
 		return cs;
 	}
 
