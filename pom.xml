@@ -165,11 +165,11 @@
 			<artifactId>bfp-model</artifactId>
 			<version>1.0.2-final</version>
 		</dependency>
-		<dependency>
-			<groupId>com.seamfix.model</groupId>
-			<artifactId>km-model</artifactId>
-      		<version>1.0.8-final</version>
-		</dependency>
+                <dependency>
+                    <groupId>com.seamfix.model</groupId>
+                    <artifactId>dynamic-km-model</artifactId>
+                    <version>0.0.1-SNAPSHOT</version>
+                </dependency>
 		<dependency>
 			<groupId>com.seamfix.kyc</groupId>
 			<artifactId>base-model</artifactId>
