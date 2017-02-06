@@ -45,6 +45,13 @@ public enum SettingsEnum {
     PUK_MIN_LENGTH("PUK-MIN-LENGTH", "8", "PUK minimum length"),
     PUK_MAX_LENGTH("PUK-MAX-LENGTH", "8", "PUK maximum length"),
     
+    //Biometric Validation
+    PORTRAIT_MANDATORY("PORTRAIT-MANDATORY", "true", "Determines whether portrait capture is mandatory"),
+    VALIDATE_PORTRAIT("VALIDATE-PORTRAIT", "true", "Determines whether portrait validation is required"),
+    FINGERPRINT_MANDATORY("FINGERPRINT-MANDATORY", "true", "Determines whether fingerprint capture is mandatory"),
+    VALIDATE_FINGERPRINT("VALIDATE-FINGERPRINT", "true", "Determines whether fingerprint validation is required"),
+    REQUIRED_FINGERPRINT_TYPES("REQUIRED-FINGERPRINT-TYPES", "RT, RI, RM, RR, RP, LT, LI, LM, LR, LP", "This is a comma separated values of available or required fingerprint types to be captured on the client (R and L stands for Right and Left respectively. T, I, M, R and P stands for Thumb, Index, Middle, Ring and Pinky fingers respectively)"),
+    
     NOTIFICATION_CHECKER_INTERVAL("NOTIFICATION-CHECKER-INTERVAL", "60", "Time interval, in seconds, between which client checks for notifications from server"),
     AGENT_BIOSYNC_INTERVAL("AGENT-BIOSYNC-INTERVAL", "60", "Time interval, in seconds, between which client sends available agents' biometrics to server"),
     AUDIT_SYNC_INTERVAL("AUDIT-SYNC-INTERVAL", "1800", "Time interval, in seconds, between which client sends available client activity logs to HTTP server"),
@@ -53,7 +60,7 @@ public enum SettingsEnum {
     ACTIVATION_CHECKER_INTERVAL("ACTIVATION-CHECKER-INTERVAL", "1200", "Time interval, in seconds, between which client checks server for activation status of msisdns"),
     SYNCHRONIZER_INTERVAL("SYNCHRONIZER-INTERVAL", "2", "Time interval, in seconds, between which client sends available sync files to SFTP server for processing"),
     HARMONIZER_INTERVAL("HARMONIZER-INTERVAL", "120", "Time interval, in seconds, between which client checks for status of each registration using unique ID"),
-    SETTINGS_INTERVAL("SETTINGS_INTERVAL", "300", "Time interval, in seconds, between which client checks server for settings"),
+    SETTINGS_INTERVAL("SETTINGS-INTERVAL", "300", "Time interval, in seconds, between which client checks server for settings"),
     BLACKLIST_CHECKER_INTERVAL("BLACKLIST-CHECKER-INTERVAL", "600", "Time interval, in seconds, between which client checks server for kit and agent blacklist status");
 
     
