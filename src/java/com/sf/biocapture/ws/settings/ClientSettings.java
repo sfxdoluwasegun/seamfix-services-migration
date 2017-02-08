@@ -23,8 +23,7 @@ public class ClientSettings extends SettingsResponse {
     private boolean pukMandatoryNS = Boolean.FALSE;
 
     //NEW REGISTRATION MSISDN+SERIAL
-    private boolean validateMsisdnNMS = Boolean.TRUE;
-    private boolean validateSerialNMS = Boolean.TRUE;
+    private boolean validateNMS = Boolean.TRUE;
     private boolean pukMandatoryNMS = Boolean.FALSE;
 
     //DYNAMIC DEMOGRAPHICS
@@ -40,9 +39,9 @@ public class ClientSettings extends SettingsResponse {
 
     //Biometric Validation
     private boolean portraitCaptureMandatory = Boolean.TRUE;
-    private boolean portraitValidationMandotary = Boolean.TRUE;
+    private boolean portraitValidationMandatory = Boolean.TRUE;
     private boolean fingerprintCaptureMandatory = Boolean.TRUE;
-    private boolean fingerprintValidationMandotary = Boolean.TRUE;
+    private boolean fingerprintValidationMandatory = Boolean.TRUE;
 
     private List<SettingFingerprintTypesEnum> fingerprintTypes;
 
@@ -84,20 +83,12 @@ public class ClientSettings extends SettingsResponse {
         this.pukMandatoryNS = pukMandatoryNS;
     }
 
-    public boolean isValidateMsisdnNMS() {
-        return validateMsisdnNMS;
+    public boolean isValidateNMS() {
+        return validateNMS;
     }
 
-    public void setValidateMsisdnNMS(boolean validateMsisdnNMS) {
-        this.validateMsisdnNMS = validateMsisdnNMS;
-    }
-
-    public boolean isValidateSerialNMS() {
-        return validateSerialNMS;
-    }
-
-    public void setValidateSerialNMS(boolean validateSerialNMS) {
-        this.validateSerialNMS = validateSerialNMS;
+    public void setValidateNMS(boolean validateNMS) {
+        this.validateNMS = validateNMS;
     }
 
     public boolean isPukMandatoryNMS() {
@@ -221,28 +212,27 @@ public class ClientSettings extends SettingsResponse {
         this.portraitCaptureMandatory = portraitCaptureMandatory;
     }
 
-    public boolean isPortraitValidationMandotary() {
-        return portraitValidationMandotary;
+    public boolean isPortraitValidationMandatory() {
+        return portraitValidationMandatory;
     }
 
-    public void setPortraitValidationMandotary(boolean portraitValidationMandotary) {
-        this.portraitValidationMandotary = portraitValidationMandotary;
+    public void setPortraitValidationMandatory(boolean portraitValidationMandatory) {
+        this.portraitValidationMandatory = portraitValidationMandatory;
     }
 
+    public boolean isFingerprintValidationMandatory() {
+        return fingerprintValidationMandatory;
+    }
+
+    public void setFingerprintValidationMandatory(boolean fingerprintValidationMandatory) {
+        this.fingerprintValidationMandatory = fingerprintValidationMandatory;
+    }
     public boolean isFingerprintCaptureMandatory() {
         return fingerprintCaptureMandatory;
     }
 
     public void setFingerprintCaptureMandatory(boolean fingerprintCaptureMandatory) {
         this.fingerprintCaptureMandatory = fingerprintCaptureMandatory;
-    }
-
-    public boolean isFingerprintValidationMandotary() {
-        return fingerprintValidationMandotary;
-    }
-
-    public void setFingerprintValidationMandotary(boolean fingerprintValidationMandotary) {
-        this.fingerprintValidationMandotary = fingerprintValidationMandotary;
     }
 
     public List<SettingFingerprintTypesEnum> getFingerprintTypes() {

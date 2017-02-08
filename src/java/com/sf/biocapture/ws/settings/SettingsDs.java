@@ -49,11 +49,8 @@ public class SettingsDs extends DataService {
 		String pukMandatoryNS = access.getSettingValue(SettingsEnum.PUK_MANDATORY_NS);
 		cs.setPukMandatoryNS(Boolean.valueOf(pukMandatoryNS));
 
-		String validateMsisdnNMS = access.getSettingValue(SettingsEnum.NMS_VALIDATE_MSISDN);
-		cs.setValidateMsisdnNMS(Boolean.valueOf(validateMsisdnNMS));
-
-		String validateSerialNMS = access.getSettingValue(SettingsEnum.NMS_VALIDATE_SERIAL);
-		cs.setValidateSerialNMS(Boolean.valueOf(validateSerialNMS));
+		String validateNMS = access.getSettingValue(SettingsEnum.VALIDATE_NMS);
+		cs.setValidateNMS(Boolean.valueOf(validateNMS));
 
 		String pukMandatoryNMS = access.getSettingValue(SettingsEnum.NMS_PUK_MANDATORY);
 		cs.setPukMandatoryNMS(Boolean.valueOf(pukMandatoryNMS));
@@ -66,9 +63,9 @@ public class SettingsDs extends DataService {
 		cs.setPukMaxLength(parseSettingInteger(SettingsEnum.PUK_MAX_LENGTH));
                 
                 cs.setPortraitCaptureMandatory(Boolean.valueOf(access.getSettingValue(SettingsEnum.PORTRAIT_MANDATORY)));
-                cs.setPortraitValidationMandotary(Boolean.valueOf(access.getSettingValue(SettingsEnum.VALIDATE_PORTRAIT)));
+                cs.setPortraitValidationMandatory(Boolean.valueOf(access.getSettingValue(SettingsEnum.VALIDATE_PORTRAIT)));
                 cs.setFingerprintCaptureMandatory(Boolean.valueOf(access.getSettingValue(SettingsEnum.FINGERPRINT_MANDATORY)));
-                cs.setFingerprintValidationMandotary(Boolean.valueOf(access.getSettingValue(SettingsEnum.VALIDATE_FINGERPRINT)));
+                cs.setFingerprintValidationMandatory(Boolean.valueOf(access.getSettingValue(SettingsEnum.VALIDATE_FINGERPRINT)));
                 
                 String requiredFingerprintTypes [] = access.getSettingValue(SettingsEnum.REQUIRED_FINGERPRINT_TYPES).split(",");
                 List<SettingFingerprintTypesEnum> fingerprintTypesEnum = new ArrayList<>();
