@@ -1,7 +1,9 @@
 package com.sf.biocapture.ws.settings;
 
 import com.sf.biocapture.ws.ResponseCodeEnum;
+import com.sf.biocapture.ws.ResponseData;
 import com.sf.biocapture.ws.access.SettingsResponse;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -11,10 +13,9 @@ import java.util.List;
  * @since 23/01/2017
  *
  */
-public class ClientSettings extends SettingsResponse {
+public class ClientSettings extends ResponseData {
 
     //NEW REGISTRATION MSISDN
-
     private boolean validateMsisdnNM = Boolean.TRUE;
     private boolean pukMandatoryNM = Boolean.FALSE;
 
@@ -45,12 +46,132 @@ public class ClientSettings extends SettingsResponse {
 
     private List<SettingFingerprintTypesEnum> fingerprintTypes;
 
+    private int maxMsisdn;
+    private long heartbeatRate;
+
+    private int clientRecordsLifespan;
+    private int clientAuditSyncInterval;
+    private String localIdTypes;
+    private String foreignIdTypes;
+
+    //sim swap settings
+    /**
+     * fingerprint and/or questionnaire validation
+     */
+    private String modeOfValidation;
+
+    /**
+     * no of failed fingerprint validation allowed on the client
+     */
+    private String allowableFpFailures;
+
+    /**
+     * no of frequently dialed numbers that must be matched for sim swap to
+     * continue
+     */
+    private int matchedMsisdns = 3;
+
+    private HashMap<String, String> questionnaireValidation = null;
+
+    private int maxChildMsisdn;
+
+    /**
+     * no of minutes a client is allowed to stay idle before user is forced to
+     * login again
+     */
+    private int clientlockoutPeriod;
+
+    private HashMap<String, String> clientFieldSettings = null;
+
+    private boolean signRegistration;
+    private boolean otpRequired;
+    private List<String> loginMode;
+    private boolean loginOffline;
+    private String offlineValidationType;
+    private boolean airtimeSalesMandatory;
+    private String airtimeSalesURL;
+    private List<String> availableUseCases;
+    private int clientActivityLogBatchSize = 20;
+    private int maximumMsisdnAllowedPerRegistration = 5;
+    private boolean enableVasModule = true;
+    private int minimumAcceptableCharacter;
+
+    /**
+     * *SERVICE INTERVALS**
+     */
+    private int notificationsChecker;
+    private int agentBioSynchronizer;
+    private int auditXmlSynchronizer;
+    private int thresholdUpdater;
+    private int auditSynchronizer;
+    private int activationChecker;
+    private int synchronizer;
+    private int harmonizer;
+    private int settingsService;
+    private int blackLister;
+
     public ClientSettings() {
         setCode(ResponseCodeEnum.ERROR);
         setDescription(ResponseCodeEnum.ERROR.getDescription());
     }
 
-    
+    public void to(SettingsResponse sr) {
+        if (sr == null) {
+            return;
+        }
+        //client fields
+        clientFieldSettings = sr.getClientFieldSettings();
+        minimumAcceptableCharacter = sr.getMinimumAcceptableCharacter();
+        dynamicInputs = sr.getDynamicInputs();
+
+        //sim swap
+        modeOfValidation = sr.getModeOfValidation();
+        allowableFpFailures = sr.getAllowableFpFailures();
+        matchedMsisdns = sr.getMatchedMsisdns();
+        questionnaireValidation = sr.getQuestionnaireValidation();
+
+        //VAS
+        airtimeSalesMandatory = sr.getAirtimeSalesMandatory();
+        airtimeSalesURL = sr.getAirtimeSalesURL();
+        enableVasModule = sr.isEnableVasModule();
+
+        //core
+        clientlockoutPeriod = sr.getClientlockoutPeriod();
+        clientActivityLogBatchSize = sr.getClientActivityLogBatchSize();
+        loginMode = sr.getLoginMode();
+        loginOffline = sr.isLoginOffline();
+        offlineValidationType = sr.getOfflineValidationType();
+        otpRequired = sr.isOtpRequired();
+        availableUseCases = sr.getAvailableUseCases();
+        maxMsisdn = sr.getMaxMsisdn();
+        maximumMsisdnAllowedPerRegistration = sr.getMaximumMsisdnAllowedPerRegistration();
+
+        //Registrations		
+        signRegistration = sr.isSignRegistration();
+
+        //intervals
+        notificationsChecker = sr.getNotificationsChecker();
+        agentBioSynchronizer = sr.getAgentBioSynchronizer();
+        auditXmlSynchronizer = sr.getAuditXmlSynchronizer();
+        auditSynchronizer = sr.getAuditSynchronizer();
+        thresholdUpdater = sr.getThresholdUpdater();
+        activationChecker = sr.getActivationChecker();
+        synchronizer = sr.getSynchronizer();
+        harmonizer = sr.getHarmonizer();
+        settingsService = sr.getSettingsService();
+        blackLister = sr.getBlackLister();
+        heartbeatRate = sr.getHeartbeatRate();
+        clientAuditSyncInterval = sr.getClientAuditSyncInterval();
+        clientRecordsLifespan = sr.getClientRecordsLifespan();
+        clientlockoutPeriod = sr.getClientlockoutPeriod();
+
+        //
+        localIdTypes = sr.getLocalIdTypes();
+        foreignIdTypes = sr.getForeignIdTypes();
+        maxChildMsisdn = sr.getMaxChildMsisdn();
+
+    }
+
     public boolean isValidateMsisdnNM() {
         return validateMsisdnNM;
     }
@@ -105,55 +226,6 @@ public class ClientSettings extends SettingsResponse {
 
     public void setDynamicInputs(String dynamicInputs) {
         this.dynamicInputs = dynamicInputs;
-    }
-
-    public void to(SettingsResponse sr) {
-        //client fields
-        setClientFieldSettings(sr.getClientFieldSettings());
-        setRegexOne(sr.getRegexOne());
-        setRegexTwo(sr.getRegexTwo());
-        setSpoofData(sr.isSpoofData());
-        setMinimumAcceptableCharacter(sr.getMinimumAcceptableCharacter());
-        setDynamicInputs(sr.getDynamicInputs());
-
-        //sim swap
-        setModeOfValidation(sr.getModeOfValidation());
-        setAllowableFpFailures(sr.getAllowableFpFailures());
-        setMatchedMsisdns(sr.getMatchedMsisdns());
-        setQuestionnaireValidation(sr.getQuestionnaireValidation());
-
-        //VAS
-        setAirtimeSalesMandatory(sr.getAirtimeSalesMandatory());
-        setAirtimeSalesURL(sr.getAirtimeSalesURL());
-        setEnableVasModule(sr.isEnableVasModule());
-
-        //core
-        setClientlockoutPeriod(sr.getClientlockoutPeriod());
-        setClientActivityLogBatchSize(sr.getClientActivityLogBatchSize());
-        setLoginMode(sr.getLoginMode());
-        setLoginOffline(sr.isLoginOffline());
-        setOfflineValidationType(sr.getOfflineValidationType());
-        setOtpRequired(sr.isOtpRequired());
-        setAvailableUseCases(sr.getAvailableUseCases());
-        setMaxMsisdn(sr.getMaxMsisdn());
-        setMaximumMsisdnAllowedPerRegistration(sr.getMaximumMsisdnAllowedPerRegistration());
-
-        //Registrations		
-        setSignRegistration(sr.isSignRegistration());
-
-        //intervals
-        setNotificationsChecker(sr.getNotificationsChecker());
-        setAgentBioSynchronizer(sr.getAgentBioSynchronizer());
-        setAuditXmlSynchronizer(sr.getAuditXmlSynchronizer());
-        setAuditSynchronizer(sr.getAuditSynchronizer());
-        setThresholdUpdater(sr.getThresholdUpdater());
-        setActivationChecker(sr.getActivationChecker());
-        setSynchronizer(sr.getSynchronizer());
-        setHarmonizer(sr.getHarmonizer());
-        setSettingsService(sr.getSettingsService());
-        setBlackLister(sr.getBlackLister());
-        setHeartbeatRate(sr.getHeartbeatRate());
-        setClientAuditSyncInterval(sr.getClientAuditSyncInterval());
     }
 
     public int getMsisdnMinLength() {
@@ -227,6 +299,7 @@ public class ClientSettings extends SettingsResponse {
     public void setFingerprintValidationMandatory(boolean fingerprintValidationMandatory) {
         this.fingerprintValidationMandatory = fingerprintValidationMandatory;
     }
+
     public boolean isFingerprintCaptureMandatory() {
         return fingerprintCaptureMandatory;
     }
@@ -241,6 +314,286 @@ public class ClientSettings extends SettingsResponse {
 
     public void setFingerprintTypes(List<SettingFingerprintTypesEnum> fingerprintTypes) {
         this.fingerprintTypes = fingerprintTypes;
+    }
+
+    public int getMaxMsisdn() {
+        return maxMsisdn;
+    }
+
+    public void setMaxMsisdn(int maxMsisdn) {
+        this.maxMsisdn = maxMsisdn;
+    }
+
+    public long getHeartbeatRate() {
+        return heartbeatRate;
+    }
+
+    public void setHeartbeatRate(long heartbeatRate) {
+        this.heartbeatRate = heartbeatRate;
+    }
+
+    public int getClientRecordsLifespan() {
+        return clientRecordsLifespan;
+    }
+
+    public void setClientRecordsLifespan(int clientRecordsLifespan) {
+        this.clientRecordsLifespan = clientRecordsLifespan;
+    }
+
+    public int getClientAuditSyncInterval() {
+        return clientAuditSyncInterval;
+    }
+
+    public void setClientAuditSyncInterval(int clientAuditSyncInterval) {
+        this.clientAuditSyncInterval = clientAuditSyncInterval;
+    }
+
+    public String getLocalIdTypes() {
+        return localIdTypes;
+    }
+
+    public void setLocalIdTypes(String localIdTypes) {
+        this.localIdTypes = localIdTypes;
+    }
+
+    public String getForeignIdTypes() {
+        return foreignIdTypes;
+    }
+
+    public void setForeignIdTypes(String foreignIdTypes) {
+        this.foreignIdTypes = foreignIdTypes;
+    }
+
+    public String getModeOfValidation() {
+        return modeOfValidation;
+    }
+
+    public void setModeOfValidation(String modeOfValidation) {
+        this.modeOfValidation = modeOfValidation;
+    }
+
+    public String getAllowableFpFailures() {
+        return allowableFpFailures;
+    }
+
+    public void setAllowableFpFailures(String allowableFpFailures) {
+        this.allowableFpFailures = allowableFpFailures;
+    }
+
+    public int getMatchedMsisdns() {
+        return matchedMsisdns;
+    }
+
+    public void setMatchedMsisdns(int matchedMsisdns) {
+        this.matchedMsisdns = matchedMsisdns;
+    }
+
+    public HashMap<String, String> getQuestionnaireValidation() {
+        return questionnaireValidation;
+    }
+
+    public void setQuestionnaireValidation(HashMap<String, String> questionnaireValidation) {
+        this.questionnaireValidation = questionnaireValidation;
+    }
+
+    public int getMaxChildMsisdn() {
+        return maxChildMsisdn;
+    }
+
+    public void setMaxChildMsisdn(int maxChildMsisdn) {
+        this.maxChildMsisdn = maxChildMsisdn;
+    }
+
+    public int getClientlockoutPeriod() {
+        return clientlockoutPeriod;
+    }
+
+    public void setClientlockoutPeriod(int clientlockoutPeriod) {
+        this.clientlockoutPeriod = clientlockoutPeriod;
+    }
+
+    public HashMap<String, String> getClientFieldSettings() {
+        return clientFieldSettings;
+    }
+
+    public void setClientFieldSettings(HashMap<String, String> clientFieldSettings) {
+        this.clientFieldSettings = clientFieldSettings;
+    }
+
+    public boolean isSignRegistration() {
+        return signRegistration;
+    }
+
+    public void setSignRegistration(boolean signRegistration) {
+        this.signRegistration = signRegistration;
+    }
+
+    public boolean isOtpRequired() {
+        return otpRequired;
+    }
+
+    public void setOtpRequired(boolean otpRequired) {
+        this.otpRequired = otpRequired;
+    }
+
+    public List<String> getLoginMode() {
+        return loginMode;
+    }
+
+    public void setLoginMode(List<String> loginMode) {
+        this.loginMode = loginMode;
+    }
+
+    public boolean isLoginOffline() {
+        return loginOffline;
+    }
+
+    public void setLoginOffline(boolean loginOffline) {
+        this.loginOffline = loginOffline;
+    }
+
+    public String getOfflineValidationType() {
+        return offlineValidationType;
+    }
+
+    public void setOfflineValidationType(String offlineValidationType) {
+        this.offlineValidationType = offlineValidationType;
+    }
+
+    public boolean isAirtimeSalesMandatory() {
+        return airtimeSalesMandatory;
+    }
+
+    public void setAirtimeSalesMandatory(boolean airtimeSalesMandatory) {
+        this.airtimeSalesMandatory = airtimeSalesMandatory;
+    }
+
+    public String getAirtimeSalesURL() {
+        return airtimeSalesURL;
+    }
+
+    public void setAirtimeSalesURL(String airtimeSalesURL) {
+        this.airtimeSalesURL = airtimeSalesURL;
+    }
+
+    public List<String> getAvailableUseCases() {
+        return availableUseCases;
+    }
+
+    public void setAvailableUseCases(List<String> availableUseCases) {
+        this.availableUseCases = availableUseCases;
+    }
+
+    public int getClientActivityLogBatchSize() {
+        return clientActivityLogBatchSize;
+    }
+
+    public void setClientActivityLogBatchSize(int clientActivityLogBatchSize) {
+        this.clientActivityLogBatchSize = clientActivityLogBatchSize;
+    }
+
+    public int getMaximumMsisdnAllowedPerRegistration() {
+        return maximumMsisdnAllowedPerRegistration;
+    }
+
+    public void setMaximumMsisdnAllowedPerRegistration(int maximumMsisdnAllowedPerRegistration) {
+        this.maximumMsisdnAllowedPerRegistration = maximumMsisdnAllowedPerRegistration;
+    }
+
+    public boolean isEnableVasModule() {
+        return enableVasModule;
+    }
+
+    public void setEnableVasModule(boolean enableVasModule) {
+        this.enableVasModule = enableVasModule;
+    }
+
+    public int getMinimumAcceptableCharacter() {
+        return minimumAcceptableCharacter;
+    }
+
+    public void setMinimumAcceptableCharacter(int minimumAcceptableCharacter) {
+        this.minimumAcceptableCharacter = minimumAcceptableCharacter;
+    }
+
+    public int getNotificationsChecker() {
+        return notificationsChecker;
+    }
+
+    public void setNotificationsChecker(int notificationsChecker) {
+        this.notificationsChecker = notificationsChecker;
+    }
+
+    public int getAgentBioSynchronizer() {
+        return agentBioSynchronizer;
+    }
+
+    public void setAgentBioSynchronizer(int agentBioSynchronizer) {
+        this.agentBioSynchronizer = agentBioSynchronizer;
+    }
+
+    public int getAuditXmlSynchronizer() {
+        return auditXmlSynchronizer;
+    }
+
+    public void setAuditXmlSynchronizer(int auditXmlSynchronizer) {
+        this.auditXmlSynchronizer = auditXmlSynchronizer;
+    }
+
+    public int getThresholdUpdater() {
+        return thresholdUpdater;
+    }
+
+    public void setThresholdUpdater(int thresholdUpdater) {
+        this.thresholdUpdater = thresholdUpdater;
+    }
+
+    public int getAuditSynchronizer() {
+        return auditSynchronizer;
+    }
+
+    public void setAuditSynchronizer(int auditSynchronizer) {
+        this.auditSynchronizer = auditSynchronizer;
+    }
+
+    public int getActivationChecker() {
+        return activationChecker;
+    }
+
+    public void setActivationChecker(int activationChecker) {
+        this.activationChecker = activationChecker;
+    }
+
+    public int getSynchronizer() {
+        return synchronizer;
+    }
+
+    public void setSynchronizer(int synchronizer) {
+        this.synchronizer = synchronizer;
+    }
+
+    public int getHarmonizer() {
+        return harmonizer;
+    }
+
+    public void setHarmonizer(int harmonizer) {
+        this.harmonizer = harmonizer;
+    }
+
+    public int getSettingsService() {
+        return settingsService;
+    }
+
+    public void setSettingsService(int settingsService) {
+        this.settingsService = settingsService;
+    }
+
+    public int getBlackLister() {
+        return blackLister;
+    }
+
+    public void setBlackLister(int blackLister) {
+        this.blackLister = blackLister;
     }
 
 }
