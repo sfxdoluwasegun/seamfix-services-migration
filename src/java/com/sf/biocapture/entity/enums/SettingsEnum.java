@@ -34,8 +34,7 @@ public enum SettingsEnum {
     PUK_MANDATORY_NM("PUK-MANDATORY-NM", "false", "Determines whether puk is mandatory for New Reg (MSISDN) use case"),
     VALIDATE_SERIAL_NS("VALIDATE-SERIAL-NS", "true", "Determines whether client will do backend validation for sim serial for New Reg (SIM SERIAL) use case"),
     PUK_MANDATORY_NS("PUK-MANDATORY-NS", "false", "Determines whether puk is mandatory for New Reg (SIM SERIAL) use case"),
-    NMS_VALIDATE_MSISDN("NMS-VALIDATE-MSISDN", "true", "Determines whether client will do backend validation for msisdn for New Reg (MSISDN+SERIAL) use case"),
-    NMS_VALIDATE_SERIAL("NMS-VALIDATE-SERIAL", "true", "Determines whether client will do backend validation for sim serial for New Reg (MSISDN+SERIAL) use case"),
+    VALIDATE_NMS("VALIDATE-NMS", "true", "Determines whether client will do backend validation for msisdn and serial for New Reg (MSISDN+SERIAL) use case"),
     NMS_PUK_MANDATORY("NMS-PUK-MANDATORY", "false", "Determines whether puk is mandatory for New Reg (MSISSN+SERIAL) use case"),
     
     MSISDN_MIN_LENGTH("MSISDN-MIN-LENGTH", "11", "MSISDN minimum length"),
