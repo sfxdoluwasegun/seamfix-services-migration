@@ -558,17 +558,18 @@ public class AccessDS extends DataService {
                 sr.setMaximumMsisdnAllowedPerRegistration(parseSettingInteger(SettingsEnum.MAXIMUM_MSISDN_ALLOWED_PER_REGISTRATION));
                 
                 //CLIENT SERVICE INTERVALS
-                sr.setNotificationsChecker(parseSettingInteger(SettingsEnum.NOTIFICATION_CHECKER_INTERVAL));
-                sr.setAgentBioSynchronizer(parseSettingInteger(SettingsEnum.AGENT_BIOSYNC_INTERVAL));
+                sr.setNotificationsCheckerInterval(parseSettingInteger(SettingsEnum.NOTIFICATION_CHECKER_INTERVAL));
+                sr.setAgentBioSynchronizerInterval(parseSettingInteger(SettingsEnum.AGENT_BIOSYNC_INTERVAL));
 	
-                sr.setAuditXmlSynchronizer(parseSettingInteger(SettingsEnum.AUDIT_XML_SYNC_INTERVAL));
-                sr.setAuditSynchronizer(parseSettingInteger(SettingsEnum.AUDIT_SYNC_INTERVAL));
-                sr.setThresholdUpdater(parseSettingInteger(SettingsEnum.THRESHOLD_CHECKER_INTERVAL));
-                sr.setActivationChecker(parseSettingInteger(SettingsEnum.ACTIVATION_CHECKER_INTERVAL));
-                sr.setSynchronizer(parseSettingInteger(SettingsEnum.SYNCHRONIZER_INTERVAL));
-                sr.setHarmonizer(parseSettingInteger(SettingsEnum.HARMONIZER_INTERVAL));
-                sr.setSettingsService(parseSettingInteger(SettingsEnum.SETTINGS_INTERVAL));
-                sr.setBlackLister(parseSettingInteger(SettingsEnum.BLACKLIST_CHECKER_INTERVAL));
+                sr.setAuditXmlSynchronizerInterval(parseSettingInteger(SettingsEnum.AUDIT_XML_SYNC_INTERVAL));
+                sr.setAuditSynchronizerInterval(parseSettingInteger(SettingsEnum.AUDIT_SYNC_INTERVAL));
+                sr.setThresholdUpdaterInterval(parseSettingInteger(SettingsEnum.THRESHOLD_CHECKER_INTERVAL));
+                sr.setActivationCheckerInterval(parseSettingInteger(SettingsEnum.ACTIVATION_CHECKER_INTERVAL));
+                sr.setSynchronizerInterval(parseSettingInteger(SettingsEnum.SYNCHRONIZER_INTERVAL));
+                sr.setHarmonizerInterval(parseSettingInteger(SettingsEnum.HARMONIZER_INTERVAL));
+                sr.setSettingsServiceInterval(parseSettingInteger(SettingsEnum.SETTINGS_INTERVAL));
+                sr.setBlackListerInterval(parseSettingInteger(SettingsEnum.BLACKLIST_CHECKER_INTERVAL));
+                sr.setOtaInterval(parseSettingInteger(SettingsEnum.OTA_INTERVAL));
 		return sr;
 	}
 	

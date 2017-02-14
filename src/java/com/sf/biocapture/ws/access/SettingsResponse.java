@@ -68,18 +68,21 @@ public class SettingsResponse extends ResponseData {
     private boolean enableVasModule = true;
     private int minimumAcceptableCharacter;
     private String dynamicInputs;
-    
-    /***SERVICE INTERVALS***/
-    private int notificationsChecker;
-    private int agentBioSynchronizer;
-    private int auditXmlSynchronizer;
-    private int thresholdUpdater;
-    private int auditSynchronizer;
-    private int activationChecker;
-    private int synchronizer;
-    private int harmonizer;
-    private int settingsService;
-    private int blackLister;
+
+    /**
+     * *SERVICE INTERVALS**
+     */
+    private int notificationsCheckerInterval;
+    private int agentBioSynchronizerInterval;
+    private int auditXmlSynchronizerInterval;
+    private int thresholdUpdaterInterval;
+    private int auditSynchronizerInterval;
+    private int activationCheckerInterval;
+    private int synchronizerInterval;
+    private int harmonizerInterval;
+    private int settingsServiceInterval;
+    private int blackListerInterval;
+    private int otaInterval;
 
     public SettingsResponse() {
         setCode(ResponseCodeEnum.ERROR);
@@ -358,88 +361,95 @@ public class SettingsResponse extends ResponseData {
         this.dynamicInputs = dynamicInputs;
     }
 
-	public int getNotificationsChecker() {
-		return notificationsChecker;
-	}
+    public void setHeartbeatRate(long heartbeatRate) {
+        this.heartbeatRate = heartbeatRate;
+    }
 
-	public void setNotificationsChecker(int notificationsChecker) {
-		this.notificationsChecker = notificationsChecker;
-	}
+    public int getNotificationsCheckerInterval() {
+        return notificationsCheckerInterval;
+    }
 
-	public int getAgentBioSynchronizer() {
-		return agentBioSynchronizer;
-	}
+    public void setNotificationsCheckerInterval(int notificationsCheckerInterval) {
+        this.notificationsCheckerInterval = notificationsCheckerInterval;
+    }
 
-	public void setAgentBioSynchronizer(int agentBioSynchronizer) {
-		this.agentBioSynchronizer = agentBioSynchronizer;
-	}
+    public int getAgentBioSynchronizerInterval() {
+        return agentBioSynchronizerInterval;
+    }
 
-	public int getAuditXmlSynchronizer() {
-		return auditXmlSynchronizer;
-	}
+    public void setAgentBioSynchronizerInterval(int agentBioSynchronizerInterval) {
+        this.agentBioSynchronizerInterval = agentBioSynchronizerInterval;
+    }
 
-	public void setAuditXmlSynchronizer(int auditXmlSynchronizer) {
-		this.auditXmlSynchronizer = auditXmlSynchronizer;
-	}
+    public int getAuditXmlSynchronizerInterval() {
+        return auditXmlSynchronizerInterval;
+    }
 
-	public int getThresholdUpdater() {
-		return thresholdUpdater;
-	}
+    public void setAuditXmlSynchronizerInterval(int auditXmlSynchronizerInterval) {
+        this.auditXmlSynchronizerInterval = auditXmlSynchronizerInterval;
+    }
 
-	public void setThresholdUpdater(int thresholdUpdater) {
-		this.thresholdUpdater = thresholdUpdater;
-	}
+    public int getThresholdUpdaterInterval() {
+        return thresholdUpdaterInterval;
+    }
 
-	public int getAuditSynchronizer() {
-		return auditSynchronizer;
-	}
+    public void setThresholdUpdaterInterval(int thresholdUpdaterInterval) {
+        this.thresholdUpdaterInterval = thresholdUpdaterInterval;
+    }
 
-	public void setAuditSynchronizer(int auditSynchronizer) {
-		this.auditSynchronizer = auditSynchronizer;
-	}
+    public int getAuditSynchronizerInterval() {
+        return auditSynchronizerInterval;
+    }
 
-	public int getActivationChecker() {
-		return activationChecker;
-	}
+    public void setAuditSynchronizerInterval(int auditSynchronizerInterval) {
+        this.auditSynchronizerInterval = auditSynchronizerInterval;
+    }
 
-	public void setActivationChecker(int activationChecker) {
-		this.activationChecker = activationChecker;
-	}
+    public int getActivationCheckerInterval() {
+        return activationCheckerInterval;
+    }
 
-	public int getSynchronizer() {
-		return synchronizer;
-	}
+    public void setActivationCheckerInterval(int activationCheckerInterval) {
+        this.activationCheckerInterval = activationCheckerInterval;
+    }
 
-	public void setSynchronizer(int synchronizer) {
-		this.synchronizer = synchronizer;
-	}
+    public int getSynchronizerInterval() {
+        return synchronizerInterval;
+    }
 
-	public int getHarmonizer() {
-		return harmonizer;
-	}
+    public void setSynchronizerInterval(int synchronizerInterval) {
+        this.synchronizerInterval = synchronizerInterval;
+    }
 
-	public void setHarmonizer(int harmonizer) {
-		this.harmonizer = harmonizer;
-	}
+    public int getHarmonizerInterval() {
+        return harmonizerInterval;
+    }
 
-	public int getSettingsService() {
-		return settingsService;
-	}
+    public void setHarmonizerInterval(int harmonizerInterval) {
+        this.harmonizerInterval = harmonizerInterval;
+    }
 
-	public void setSettingsService(int settingsService) {
-		this.settingsService = settingsService;
-	}
+    public int getSettingsServiceInterval() {
+        return settingsServiceInterval;
+    }
 
-	public int getBlackLister() {
-		return blackLister;
-	}
+    public void setSettingsServiceInterval(int settingsServiceInterval) {
+        this.settingsServiceInterval = settingsServiceInterval;
+    }
 
-	public void setBlackLister(int blackLister) {
-		this.blackLister = blackLister;
-	}
+    public int getBlackListerInterval() {
+        return blackListerInterval;
+    }
 
-	public void setHeartbeatRate(long heartbeatRate) {
-		this.heartbeatRate = heartbeatRate;
-	}
- 
+    public void setBlackListerInterval(int blackListerInterval) {
+        this.blackListerInterval = blackListerInterval;
+    }
+
+    public int getOtaInterval() {
+        return otaInterval;
+    }
+
+    public void setOtaInterval(int otaInterval) {
+        this.otaInterval = otaInterval;
+    }    
 }

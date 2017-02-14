@@ -60,6 +60,8 @@ public enum SettingsEnum {
     SYNCHRONIZER_INTERVAL("SYNCHRONIZER-INTERVAL", "2", "Time interval, in seconds, between which client sends available sync files to SFTP server for processing"),
     HARMONIZER_INTERVAL("HARMONIZER-INTERVAL", "120", "Time interval, in seconds, between which client checks for status of each registration using unique ID"),
     SETTINGS_INTERVAL("SETTINGS-INTERVAL", "300", "Time interval, in seconds, between which client checks server for settings"),
+    OTA_INTERVAL("OTA-INTERVAL", "300", "Time interval, in seconds, between which client checks for new application update"),
+    
     BLACKLIST_CHECKER_INTERVAL("BLACKLIST-CHECKER-INTERVAL", "600", "Time interval, in seconds, between which client checks server for kit and agent blacklist status");
 
     

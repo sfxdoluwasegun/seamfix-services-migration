@@ -99,17 +99,18 @@ public class ClientSettings extends ResponseData {
     /**
      * *SERVICE INTERVALS**
      */
-    private int notificationsChecker;
-    private int agentBioSynchronizer;
-    private int auditXmlSynchronizer;
-    private int thresholdUpdater;
-    private int auditSynchronizer;
-    private int activationChecker;
-    private int synchronizer;
-    private int harmonizer;
-    private int settingsService;
-    private int blackLister;
-
+    private int notificationsCheckerInterval;
+    private int agentBioSynchronizerInterval;
+    private int auditXmlSynchronizerInterval;
+    private int thresholdUpdaterInterval;
+    private int auditSynchronizerInterval;
+    private int activationCheckerInterval;
+    private int synchronizerInterval;
+    private int harmonizerInterval;
+    private int settingsServiceInterval;
+    private int blackListerInterval;
+    private int otaInterval;
+    
     public ClientSettings() {
         setCode(ResponseCodeEnum.ERROR);
         setDescription(ResponseCodeEnum.ERROR.getDescription());
@@ -123,18 +124,15 @@ public class ClientSettings extends ResponseData {
         clientFieldSettings = sr.getClientFieldSettings();
         minimumAcceptableCharacter = sr.getMinimumAcceptableCharacter();
         dynamicInputs = sr.getDynamicInputs();
-
         //sim swap
         modeOfValidation = sr.getModeOfValidation();
         allowableFpFailures = sr.getAllowableFpFailures();
         matchedMsisdns = sr.getMatchedMsisdns();
         questionnaireValidation = sr.getQuestionnaireValidation();
-
         //VAS
         airtimeSalesMandatory = sr.getAirtimeSalesMandatory();
         airtimeSalesURL = sr.getAirtimeSalesURL();
         enableVasModule = sr.isEnableVasModule();
-
         //core
         clientlockoutPeriod = sr.getClientlockoutPeriod();
         clientActivityLogBatchSize = sr.getClientActivityLogBatchSize();
@@ -145,26 +143,24 @@ public class ClientSettings extends ResponseData {
         availableUseCases = sr.getAvailableUseCases();
         maxMsisdn = sr.getMaxMsisdn();
         maximumMsisdnAllowedPerRegistration = sr.getMaximumMsisdnAllowedPerRegistration();
-
         //Registrations		
         signRegistration = sr.isSignRegistration();
-
         //intervals
-        notificationsChecker = sr.getNotificationsChecker();
-        agentBioSynchronizer = sr.getAgentBioSynchronizer();
-        auditXmlSynchronizer = sr.getAuditXmlSynchronizer();
-        auditSynchronizer = sr.getAuditSynchronizer();
-        thresholdUpdater = sr.getThresholdUpdater();
-        activationChecker = sr.getActivationChecker();
-        synchronizer = sr.getSynchronizer();
-        harmonizer = sr.getHarmonizer();
-        settingsService = sr.getSettingsService();
-        blackLister = sr.getBlackLister();
+        notificationsCheckerInterval = sr.getNotificationsCheckerInterval();
+        agentBioSynchronizerInterval = sr.getAgentBioSynchronizerInterval();
+        auditXmlSynchronizerInterval = sr.getAuditXmlSynchronizerInterval();
+        auditSynchronizerInterval = sr.getAuditSynchronizerInterval();
+        thresholdUpdaterInterval = sr.getThresholdUpdaterInterval();
+        activationCheckerInterval = sr.getActivationCheckerInterval();
+        synchronizerInterval = sr.getSynchronizerInterval();
+        harmonizerInterval = sr.getHarmonizerInterval();
+        settingsServiceInterval = sr.getSettingsServiceInterval();
+        blackListerInterval = sr.getBlackListerInterval();
+        otaInterval = sr.getOtaInterval();
         heartbeatRate = sr.getHeartbeatRate();
         clientAuditSyncInterval = sr.getClientAuditSyncInterval();
         clientRecordsLifespan = sr.getClientRecordsLifespan();
         clientlockoutPeriod = sr.getClientlockoutPeriod();
-
         //
         localIdTypes = sr.getLocalIdTypes();
         foreignIdTypes = sr.getForeignIdTypes();
@@ -516,84 +512,91 @@ public class ClientSettings extends ResponseData {
         this.minimumAcceptableCharacter = minimumAcceptableCharacter;
     }
 
-    public int getNotificationsChecker() {
-        return notificationsChecker;
+    public int getNotificationsCheckerInterval() {
+        return notificationsCheckerInterval;
     }
 
-    public void setNotificationsChecker(int notificationsChecker) {
-        this.notificationsChecker = notificationsChecker;
+    public void setNotificationsCheckerInterval(int notificationsCheckerInterval) {
+        this.notificationsCheckerInterval = notificationsCheckerInterval;
     }
 
-    public int getAgentBioSynchronizer() {
-        return agentBioSynchronizer;
+    public int getAgentBioSynchronizerInterval() {
+        return agentBioSynchronizerInterval;
     }
 
-    public void setAgentBioSynchronizer(int agentBioSynchronizer) {
-        this.agentBioSynchronizer = agentBioSynchronizer;
+    public void setAgentBioSynchronizerInterval(int agentBioSynchronizerInterval) {
+        this.agentBioSynchronizerInterval = agentBioSynchronizerInterval;
     }
 
-    public int getAuditXmlSynchronizer() {
-        return auditXmlSynchronizer;
+    public int getAuditXmlSynchronizerInterval() {
+        return auditXmlSynchronizerInterval;
     }
 
-    public void setAuditXmlSynchronizer(int auditXmlSynchronizer) {
-        this.auditXmlSynchronizer = auditXmlSynchronizer;
+    public void setAuditXmlSynchronizerInterval(int auditXmlSynchronizerInterval) {
+        this.auditXmlSynchronizerInterval = auditXmlSynchronizerInterval;
     }
 
-    public int getThresholdUpdater() {
-        return thresholdUpdater;
+    public int getThresholdUpdaterInterval() {
+        return thresholdUpdaterInterval;
     }
 
-    public void setThresholdUpdater(int thresholdUpdater) {
-        this.thresholdUpdater = thresholdUpdater;
+    public void setThresholdUpdaterInterval(int thresholdUpdaterInterval) {
+        this.thresholdUpdaterInterval = thresholdUpdaterInterval;
     }
 
-    public int getAuditSynchronizer() {
-        return auditSynchronizer;
+    public int getAuditSynchronizerInterval() {
+        return auditSynchronizerInterval;
     }
 
-    public void setAuditSynchronizer(int auditSynchronizer) {
-        this.auditSynchronizer = auditSynchronizer;
+    public void setAuditSynchronizerInterval(int auditSynchronizerInterval) {
+        this.auditSynchronizerInterval = auditSynchronizerInterval;
     }
 
-    public int getActivationChecker() {
-        return activationChecker;
+    public int getActivationCheckerInterval() {
+        return activationCheckerInterval;
     }
 
-    public void setActivationChecker(int activationChecker) {
-        this.activationChecker = activationChecker;
+    public void setActivationCheckerInterval(int activationCheckerInterval) {
+        this.activationCheckerInterval = activationCheckerInterval;
     }
 
-    public int getSynchronizer() {
-        return synchronizer;
+    public int getSynchronizerInterval() {
+        return synchronizerInterval;
     }
 
-    public void setSynchronizer(int synchronizer) {
-        this.synchronizer = synchronizer;
+    public void setSynchronizerInterval(int synchronizerInterval) {
+        this.synchronizerInterval = synchronizerInterval;
     }
 
-    public int getHarmonizer() {
-        return harmonizer;
+    public int getHarmonizerInterval() {
+        return harmonizerInterval;
     }
 
-    public void setHarmonizer(int harmonizer) {
-        this.harmonizer = harmonizer;
+    public void setHarmonizerInterval(int harmonizerInterval) {
+        this.harmonizerInterval = harmonizerInterval;
     }
 
-    public int getSettingsService() {
-        return settingsService;
+    public int getSettingsServiceInterval() {
+        return settingsServiceInterval;
     }
 
-    public void setSettingsService(int settingsService) {
-        this.settingsService = settingsService;
+    public void setSettingsServiceInterval(int settingsServiceInterval) {
+        this.settingsServiceInterval = settingsServiceInterval;
     }
 
-    public int getBlackLister() {
-        return blackLister;
+    public int getBlackListerInterval() {
+        return blackListerInterval;
     }
 
-    public void setBlackLister(int blackLister) {
-        this.blackLister = blackLister;
+    public void setBlackListerInterval(int blackListerInterval) {
+        this.blackListerInterval = blackListerInterval;
     }
 
+    public int getOtaInterval() {
+        return otaInterval;
+    }
+
+    public void setOtaInterval(int otaInterval) {
+        this.otaInterval = otaInterval;
+    }
 }
