@@ -83,6 +83,7 @@ public class BeatMessageListener extends BsClazz implements MessageListener {
             h.setAppVersion(beat.getAppVersion());
 
             h.setReceiptTimestamp(new Timestamp(new Date().getTime()));
+            h.setThresholdVersion(beat.getThresholdVersion());
             bsm.getDbService().create(h);
         } catch (NwormQueryException e) {
             logger.error("Exception : ", e);
