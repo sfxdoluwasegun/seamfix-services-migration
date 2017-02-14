@@ -151,16 +151,17 @@ public class ClientSettings extends SettingsResponse {
         setSignRegistration(sr.isSignRegistration());
 
         //intervals
-        setNotificationsChecker(sr.getNotificationsChecker());
-        setAgentBioSynchronizer(sr.getAgentBioSynchronizer());
-        setAuditXmlSynchronizer(sr.getAuditXmlSynchronizer());
-        setAuditSynchronizer(sr.getAuditSynchronizer());
-        setThresholdUpdater(sr.getThresholdUpdater());
-        setActivationChecker(sr.getActivationChecker());
-        setSynchronizer(sr.getSynchronizer());
-        setHarmonizer(sr.getHarmonizer());
-        setSettingsService(sr.getSettingsService());
-        setBlackLister(sr.getBlackLister());
+        setNotificationsCheckerInterval(sr.getNotificationsCheckerInterval());
+        setAgentBioSynchronizerInterval(sr.getAgentBioSynchronizerInterval());
+        setAuditXmlSynchronizerInterval(sr.getAuditXmlSynchronizerInterval());
+        setAuditSynchronizerInterval(sr.getAuditSynchronizerInterval());
+        setThresholdUpdaterInterval(sr.getThresholdUpdaterInterval());
+        setActivationCheckerInterval(sr.getActivationCheckerInterval());
+        setSynchronizerInterval(sr.getSynchronizerInterval());
+        setHarmonizerInterval(sr.getHarmonizerInterval());
+        setSettingsServiceInterval(sr.getSettingsServiceInterval());
+        setBlackListerInterval(sr.getBlackListerInterval());
+        setOtaInterval(sr.getOtaInterval());
         setHeartbeatRate(sr.getHeartbeatRate());
         setClientAuditSyncInterval(sr.getClientAuditSyncInterval());
     }
