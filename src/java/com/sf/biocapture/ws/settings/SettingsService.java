@@ -18,21 +18,36 @@ import com.sf.biocapture.ws.access.SettingsResponse;
 public class SettingsService extends BsClazz implements ISettingsService {
 
     @Inject
-    SettingsDs settings;
+    SettingsDs settingsDs;
 
     @Override
     public Response settings(String tag, String mac) {
-        ClientSettings resp = new ClientSettings();
+        GlobalSettingResponse resp = new GlobalSettingResponse();
         try {
             if (tag != null && mac != null) {
-                resp = settings.getClientSettings();
+                resp = settingsDs.getGlobalSettings();
             } else {
-                return Response.ok(new SettingsResponse()).status(Status.OK).build();
+                return Response.ok(resp).status(Status.OK).build();
             }
         } catch (Exception e) {
             logger.error("", e);
         }
         return Response.ok(resp).status(Status.OK).build();
+    }
+
+    @Override
+    public Response clientSetting(String tag, String mac) {
+        ClientSettingResponse clientSettingResponse = new ClientSettingResponse();
+        try {
+            if (tag != null && mac != null) {
+                clientSettingResponse = settingsDs.getClientSettings();
+            } else {
+                return Response.ok(clientSettingResponse).status(Status.OK).build();
+            }
+        } catch (Exception e) {
+            logger.error("", e);
+        }
+        return Response.ok(clientSettingResponse).status(Status.OK).build();
     }
 
 }

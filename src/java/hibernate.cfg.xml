@@ -53,6 +53,9 @@
         <mapping class="com.sf.biocapture.entity.PhoneNumberStatus"/>
         <mapping class="com.sf.biocapture.entity.WsqImage"/>  
         <mapping class="com.sf.biocapture.entity.MsisdnDetail"/>
+        <mapping class="com.sf.biocapture.entity.ClientSetting"/>
+        <mapping class="com.sf.biocapture.entity.ClientSettingValue"/>
+        <mapping class="com.sf.biocapture.entity.ClientSettingVersion"/>
         <mapping class="com.sf.biocapture.entity.security.KMUser"/>
         <mapping class="com.sf.biocapture.entity.security.KMPrivilege"/>
         <mapping class="com.sf.biocapture.entity.security.KMRole"/>

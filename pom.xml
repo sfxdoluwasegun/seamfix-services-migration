@@ -159,21 +159,39 @@
             <groupId>com.seamfix.kyc</groupId>
             <artifactId>dynamic-bs-model</artifactId>
             <version>1.2.7-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.seamfix.kyc</groupId>
+                    <artifactId>dynamic-base-model</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.seamfix.kyc</groupId>
             <artifactId>dynamic-bfp-model</artifactId>
             <version>1.0.4-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.seamfix.kyc</groupId>
+                    <artifactId>dynamic-base-model</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.seamfix.kyc</groupId>
             <artifactId>dynamic-km-model</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.seamfix.kyc</groupId>
+                    <artifactId>dynamic-base-model</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.seamfix.kyc</groupId>
             <artifactId>dynamic-base-model</artifactId>
-            <version>1.0.8-SNAPSHOT</version>
+            <version>1.0.9-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>

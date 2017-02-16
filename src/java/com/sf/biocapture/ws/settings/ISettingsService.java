@@ -18,4 +18,8 @@ public interface ISettingsService {
 	@Path("/global")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response settings(@FormParam("tag") String tag, @FormParam("mac") String mac);
+	@POST
+	@Path("/client")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response clientSetting(@FormParam("tag") String tag, @FormParam("mac") String mac);
 }
