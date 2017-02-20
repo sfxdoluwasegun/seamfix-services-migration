@@ -72,37 +72,44 @@ public class SettingsDs extends DataService {
     public ClientSettingResponse getClientSettings() {
         ClientSettingResponse cs = new ClientSettingResponse();
 
-        String validateMsisdnNM = getClientSettingValue(ClientSettingEnum.VALIDATE_MSISDN_NM);
+
+        /**
+         * use this version to ensure that all the settings retrieved below are of the same version
+         */
+        ClientSettingVersion clientSettingVersion = getActiveClientSettingVersion(); 
+        cs.setSettingVersion(clientSettingVersion.getVersionNumber());
+
+        String validateMsisdnNM = getClientSettingValue(ClientSettingEnum.VALIDATE_MSISDN_NM, clientSettingVersion);
         cs.setValidateMsisdnNM(Boolean.valueOf(validateMsisdnNM));
 
-        String pukMandatoryNM = getClientSettingValue(ClientSettingEnum.PUK_MANDATORY_NM);
+        String pukMandatoryNM = getClientSettingValue(ClientSettingEnum.PUK_MANDATORY_NM, clientSettingVersion);
         cs.setPukMandatoryNM(Boolean.valueOf(pukMandatoryNM));
 
-        String validateSerialNS = getClientSettingValue(ClientSettingEnum.VALIDATE_SERIAL_NS);
+        String validateSerialNS = getClientSettingValue(ClientSettingEnum.VALIDATE_SERIAL_NS, clientSettingVersion);
         cs.setValidateSerialNS(Boolean.valueOf(validateSerialNS));
 
-        String pukMandatoryNS = getClientSettingValue(ClientSettingEnum.PUK_MANDATORY_NS);
+        String pukMandatoryNS = getClientSettingValue(ClientSettingEnum.PUK_MANDATORY_NS, clientSettingVersion);
         cs.setPukMandatoryNS(Boolean.valueOf(pukMandatoryNS));
 
-        String validateNMS = getClientSettingValue(ClientSettingEnum.VALIDATE_NMS);
+        String validateNMS = getClientSettingValue(ClientSettingEnum.VALIDATE_NMS, clientSettingVersion);
         cs.setValidateNMS(Boolean.valueOf(validateNMS));
 
-        String pukMandatoryNMS = getClientSettingValue(ClientSettingEnum.NMS_PUK_MANDATORY);
+        String pukMandatoryNMS = getClientSettingValue(ClientSettingEnum.NMS_PUK_MANDATORY, clientSettingVersion);
         cs.setPukMandatoryNMS(Boolean.valueOf(pukMandatoryNMS));
 
-        cs.setMsisdnMinLength(parseSettingInteger(ClientSettingEnum.MSISDN_MIN_LENGTH));
-        cs.setMsisdnMaxLength(parseSettingInteger(ClientSettingEnum.MSISDN_MAX_LENGTH));
-        cs.setSerialMinLength(parseSettingInteger(ClientSettingEnum.SERIAL_MIN_LENGTH));
-        cs.setSerialMaxLength(parseSettingInteger(ClientSettingEnum.SERIAL_MAX_LENGTH));
-        cs.setPukMinLength(parseSettingInteger(ClientSettingEnum.PUK_MIN_LENGTH));
-        cs.setPukMaxLength(parseSettingInteger(ClientSettingEnum.PUK_MAX_LENGTH));
+        cs.setMsisdnMinLength(parseSettingInteger(ClientSettingEnum.MSISDN_MIN_LENGTH, clientSettingVersion));
+        cs.setMsisdnMaxLength(parseSettingInteger(ClientSettingEnum.MSISDN_MAX_LENGTH, clientSettingVersion));
+        cs.setSerialMinLength(parseSettingInteger(ClientSettingEnum.SERIAL_MIN_LENGTH, clientSettingVersion));
+        cs.setSerialMaxLength(parseSettingInteger(ClientSettingEnum.SERIAL_MAX_LENGTH, clientSettingVersion));
+        cs.setPukMinLength(parseSettingInteger(ClientSettingEnum.PUK_MIN_LENGTH, clientSettingVersion));
+        cs.setPukMaxLength(parseSettingInteger(ClientSettingEnum.PUK_MAX_LENGTH, clientSettingVersion));
 
-        cs.setPortraitCaptureMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.PORTRAIT_MANDATORY)));
-        cs.setPortraitValidationMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.VALIDATE_PORTRAIT)));
-        cs.setFingerprintCaptureMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.FINGERPRINT_MANDATORY)));
-        cs.setFingerprintValidationMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.VALIDATE_FINGERPRINT)));
+        cs.setPortraitCaptureMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.PORTRAIT_MANDATORY, clientSettingVersion)));
+        cs.setPortraitValidationMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.VALIDATE_PORTRAIT, clientSettingVersion)));
+        cs.setFingerprintCaptureMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.FINGERPRINT_MANDATORY, clientSettingVersion)));
+        cs.setFingerprintValidationMandatory(Boolean.valueOf(getClientSettingValue(ClientSettingEnum.VALIDATE_FINGERPRINT, clientSettingVersion)));
 
-        String requiredFingerprintTypes[] = getClientSettingValue(ClientSettingEnum.REQUIRED_FINGERPRINT_TYPES).split(",");
+        String requiredFingerprintTypes[] = getClientSettingValue(ClientSettingEnum.REQUIRED_FINGERPRINT_TYPES, clientSettingVersion).split(",");
         List<SettingFingerprintTypesEnum> fingerprintTypesEnum = new ArrayList<>();
         for (String type : requiredFingerprintTypes) {
             fingerprintTypesEnum.add(SettingFingerprintTypesEnum.valueOf(type.trim()));
@@ -114,10 +121,10 @@ public class SettingsDs extends DataService {
         return cs;
     }
 
-    private int parseSettingInteger(ClientSettingEnum setting) {
+    private int parseSettingInteger(ClientSettingEnum setting, ClientSettingVersion clientSettingVersion) {
         int finalVal = 0;
         try {
-            finalVal = Integer.valueOf(getClientSettingValue(setting));
+            finalVal = Integer.valueOf(getClientSettingValue(setting, clientSettingVersion));
         } catch (NumberFormatException e) {
             logger.error("NumberFormatException on retrieving setting: " + setting.getName());
             finalVal = Integer.valueOf(setting.getValue()); //use default instead
@@ -125,8 +132,7 @@ public class SettingsDs extends DataService {
         return finalVal;
     }
 
-    public String getClientSettingValue(ClientSettingEnum clientSettingEnum) {
-        ClientSettingVersion clientSettingVersion = (ClientSettingVersion) cache.getItem(activeVersionCachedKey);
+    public String getClientSettingValue(ClientSettingEnum clientSettingEnum, ClientSettingVersion clientSettingVersion) {
         String settingName = clientSettingEnum.getName().trim();
         if (clientSettingVersion == null) {
             //retrieve active version
@@ -191,8 +197,12 @@ public class SettingsDs extends DataService {
 
     public ClientSettingVersion getActiveClientSettingVersion() {
         try {
+            ClientSettingVersion clientSettingVersion = (ClientSettingVersion) cache.getItem(activeVersionCachedKey);
+            if (clientSettingVersion != null) {
+                return clientSettingVersion;
+            }
             //we expect only one entry to be active at a time.
-            ClientSettingVersion clientSettingVersion = getDbService().getByCriteria(ClientSettingVersion.class, Restrictions.eq("clientSettingStatusEnum", ClientSettingStatusEnum.ACTIVE));
+            clientSettingVersion = getDbService().getByCriteria(ClientSettingVersion.class, Restrictions.eq("clientSettingStatusEnum", ClientSettingStatusEnum.ACTIVE));
             if (clientSettingVersion == null) {
                 clientSettingVersion = new ClientSettingVersion();
                 clientSettingVersion.setClientSettingStatusEnum(ClientSettingStatusEnum.ACTIVE);
