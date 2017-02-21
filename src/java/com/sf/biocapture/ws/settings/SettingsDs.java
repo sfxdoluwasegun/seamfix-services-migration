@@ -214,6 +214,7 @@ public class SettingsDs extends DataService {
                 clientSettingVersion.setVersionNumber(version + 1);
                 getDbService().create(clientSettingVersion);
             }
+            cache.setItem(activeVersionCachedKey, clientSettingVersion, cacheAge);
             return clientSettingVersion;
         } catch (NwormQueryException e) {
             logger.error("", e);
