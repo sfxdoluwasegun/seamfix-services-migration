@@ -18,7 +18,7 @@ import com.sf.biocapture.app.BioCache;
 import com.sf.biocapture.ds.DataService;
 import com.sf.biocapture.entity.EnrollmentRef;
 import com.sf.biocapture.entity.UserId;
-import com.sf.biocapture.entity.audit.BfpFailureLog;
+import com.sf.biocapture.entity.audit.BfpSyncLog;
 
 import nw.commons.StopWatch;
 
@@ -48,12 +48,12 @@ public class SyncDS extends DataService{
 				return BOOLEAN_TRUE + "," + si.getTime();
 			}else{
 				logger.debug("Checking bfp failure log for " + uid);
-				//check bfp failure log
-				List<BfpFailureLog> listlog = getBfpLog(uid.replaceAll(" ", ""));
+				//check bfp sync log
+				List<BfpSyncLog> listlog = getBfpLog(uid.replaceAll(" ", ""));
 				if(listlog != null && !listlog.isEmpty()){
 					logger.debug("Found status in bfp failure log for " + uid);
-					BfpFailureLog log = listlog.get(0);
-					logger.debug("Failure log found for " + uid + "; Rejection reason: " + log.getRejectionReason()); 
+					BfpSyncLog log = listlog.get(0);
+					logger.debug("Failure log found for " + uid + "; Rejection reason: " + log.getBfpSyncStatusEnum()); 
 					cache.setItem(uid.replaceAll(" ", ""), log.getCreateDate().getTime(), 24 * 60 * 60);
 					return BOOLEAN_TRUE + "," + log.getCreateDate().getTime();
 				}
@@ -138,7 +138,7 @@ public class SyncDS extends DataService{
 		return userId == null ? null : userId.getCreateDate();
 	}
 	
-	private List<BfpFailureLog> getBfpLog(String uid){
-		return dbService.getListByCriteria(BfpFailureLog.class, Restrictions.eq("uniqueId", uid));
+	private List<BfpSyncLog> getBfpLog(String uid){
+		return dbService.getListByCriteria(BfpSyncLog.class, Restrictions.eq("uniqueId", uid));
 	}
 }
